@@ -8,12 +8,12 @@ RETURNS BOOLEAN
 AS $$
 
     DECLARE
-        idFamilia BIGINT := (SELECT F.idFamilia FROM familia F WHERE F.nombre LIKE nombreInput);
+        idFamiliaLookup BIGINT := (SELECT F.idFamilia FROM familia F WHERE F.nombre LIKE nombreInput);
     BEGIN
 
-        IF idFamilia IS NOT NULL THEN
+        IF idFamiliaLookup IS NOT NULL THEN
 
-            IF (SELECT F.borrado FROM familia F WHERE idFamilia = F.idFamilia) = False THEN
+            IF (SELECT F.borrado FROM familia F WHERE idFamiliaLookup = F.idFamilia) = False THEN
                 RETURN False;
             ELSE
                 
@@ -40,8 +40,6 @@ select spAgregarFamilia('Fabaceae') as success;
 SELECT * FROM familia;
 */
 
-
-
 CREATE OR REPLACE FUNCTION spAgregarFenologia(
 
     nombreInput varchar
@@ -51,12 +49,12 @@ RETURNS BOOLEAN
 AS $$
 
     DECLARE
-        idFenologia BIGINT := (SELECT F.idFenologia FROM fenologia F WHERE F.nombre LIKE nombreInput);
+        idFenologiaLookup BIGINT := (SELECT F.idFenologia FROM fenologia F WHERE F.nombre LIKE nombreInput);
     BEGIN
 
-        IF idFenologia IS NOT NULL THEN
+        IF idFenologiaLookup IS NOT NULL THEN
 
-            IF (SELECT F.borrado FROM fenologia F WHERE idFenologia = F.idFamilia) = False THEN
+            IF (SELECT F.borrado FROM fenologia F WHERE idFenologiaLookup = F.idFenologia) = False THEN
                 RETURN False;
             ELSE
                 
@@ -93,12 +91,12 @@ RETURNS BOOLEAN
 AS $$
 
     DECLARE
-        idAgentePolinizador BIGINT := (SELECT A.idAgentePolinizador FROM agentePolinizador A WHERE A.nombre LIKE nombreInput);
+        idAgentePolinizadorLookup BIGINT := (SELECT A.idAgentePolinizador FROM agentePolinizador A WHERE A.nombre LIKE nombreInput);
     BEGIN
 
-        IF idAgentePolinizador IS NOT NULL THEN
+        IF idAgentePolinizadorLookup IS NOT NULL THEN
 
-            IF (SELECT A.borrado FROM agentePolinizador A WHERE idAgentePolinizador = A.idAgentePolinizador) = False THEN
+            IF (SELECT A.borrado FROM agentePolinizador A WHERE idAgentePolinizadorLookup = A.idAgentePolinizador) = False THEN
                 RETURN False;
             ELSE
                 
@@ -134,12 +132,12 @@ RETURNS BOOLEAN
 AS $$
 
     DECLARE
-        idMetodoDispersion BIGINT := (SELECT M.idMetodoDispersion FROM metodoDispersion M WHERE M.nombre LIKE nombreInput);
+        idMetodoDispersionLookup BIGINT := (SELECT M.idMetodoDispersion FROM metodoDispersion M WHERE M.nombre LIKE nombreInput);
     BEGIN
 
-        IF idMetodoDispersion IS NOT NULL THEN
+        IF idMetodoDispersionLookup IS NOT NULL THEN
 
-            IF (SELECT M.borrado FROM metodoDispersion M WHERE idMetodoDispersion = M.idMetodoDispersion) = False THEN
+            IF (SELECT M.borrado FROM metodoDispersion M WHERE idMetodoDispersionLookup = M.idMetodoDispersion) = False THEN
                 RETURN False;
             ELSE
                 
