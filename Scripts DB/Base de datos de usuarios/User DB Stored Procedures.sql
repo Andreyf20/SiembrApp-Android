@@ -51,7 +51,7 @@ AS $$
                 VALUES(
                     nombreInput,
                     correoInput,
-                    PGP_SYM_ENCRYPT(contrasennaInput,'AES_KEY'),
+                    Crypt(contrasennaInput,'md5'),
                     trabajaAsadaInput,
                     ubicacionInput,
                     NOW(),
@@ -74,11 +74,12 @@ RETURNS BOOLEAN AS $$
 
 	DECLARE
 		correoEncontrado VARCHAR := (SELECT U.correo FROM users U WHERE U.correo = correoInput and U.borrado = False);
-		decryptedPass VARCHAR := (SELECT PGP_SYM_DECRYPT(U.contrasenna::BYTEA,'AES_KEY') FROM users U where U.correo = correoEncontrado);
+        encryptedPass VARCHAR := (SELECT U.contrasenna FROM users U where U.correo = correoEncontrado);
+        pass VARCHAR := Crypt(passwordInput,'md5');
 	BEGIN
 		
 		IF correoEncontrado IS NOT NULL THEN
-			IF (decryptedPass LIKE passwordInput) THEN
+			IF (pass LIKE encryptedPass) THEN
 				RETURN TRUE;
 			ELSE
 				RETURN FALSE;
