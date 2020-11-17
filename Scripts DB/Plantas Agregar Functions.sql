@@ -287,7 +287,7 @@ $$ LANGUAGE PLPGSQL;
 /* 
 {
     select spAgregarPlanta(
-        'Saragundí',
+        'Saragundí2',
         'Senna Reticulata',
         'Nativa',
         0,

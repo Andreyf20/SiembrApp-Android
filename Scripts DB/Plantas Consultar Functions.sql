@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION spVerTodasPlantas(especieInput varchar)
+CREATE OR REPLACE FUNCTION spVerEspecie(especieInput varchar)
 RETURNS TABLE(
             familia varchar,
             fenologia varchar,
@@ -88,6 +88,6 @@ $$
 LANGUAGE PLPGSQL;
 
 /*
-select * from spVerTodasPlantas('*');
-select * from spVerTodasPlantas('Saragundí');
+select * from spVerEspecie('*');
+select * from spVerEspecie('Saragundí');
 */
