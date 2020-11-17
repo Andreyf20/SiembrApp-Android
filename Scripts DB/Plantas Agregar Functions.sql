@@ -197,59 +197,90 @@ AS $$
         idFenologia BIGINT := (SELECT F.idFenologia FROM fenologia F WHERE LOWER(F.nombre) LIKE LOWER(fenologiaInput));
         idAgentePolinizador BIGINT := (SELECT A.idAgentePolinizador FROM agentePolinizador A WHERE LOWER(A.nombre) LIKE LOWER(agentePolinizadorInput));
         idMetodoDispersion BIGINT := (SELECT M.idMetodoDispersion FROM metodoDispersion M WHERE LOWER(M.nombre) LIKE LOWER(metodoDispersionInput));
+        idPlantaLookup BIGINT := (SELECT P.idPlanta FROM plantas P WHERE LOWER(P.nombreComun) LIKE LOWER(nombreComunInput));
     BEGIN
 
-        -- TO DO Verificacion en caso de plantas.borrado = True
+        IF idPlantaLookup IS NOT NULL THEN
 
-        INSERT INTO plantas(
-            idFamilia,
-            idFenologia,
-            idAgentePolinizador,
-            idMetodoDispersion,
+            IF (SELECT P.borrado FROM plantas P WHERE idPlantaLookup = P.idPlanta) = False THEN
+                RETURN False;
+            ELSE
+                
+                UPDATE plantas SET
 
-            nombreComun,
-            nombreCientifico,
-            origen,
-            minRangoAltitudinal,
-            maxRangoAltitudinal,
-			metros,
-            requerimientosDeLuz,
-            habito,
-            frutos,
-            texturaFruto,
-            flor,
-            usosConocidos,
-            paisajeRecomendado,
+                    plantas.idFamilia=idFamilia,
+                    plantas.idFenologia=idFenologia,
+                    plantas.idAgentePolinizador=idAgentePolinizador,
+                    plantas.idMetodoDispersion=idMetodoDispersion,
 
-            -- Mantenimineto
-            ultimaActualizacion,
-            borrado
-        )
-        VALUES(
-            idFamilia,
-            idFenologia,
-            idAgentePolinizador,
-            idMetodoDispersion,
+                    plantas.nombreCientifico=nombreCientificoInput,
+                    plantas.origen=origenInput,
+                    plantas.minRangoAltitudinal=minRangoAltitudinalInput,
+                    plantas.maxRangoAltitudinal=maxRangoAltitudinalInput,
+                    plantas.metros=metrosInput,
+                    plantas.requerimientosDeLuz=requerimientosDeLuzInput,
+                    plantas.habito=habitoInput,
+                    plantas.frutos=frutosInput,
+                    plantas.texturaFruto=texturaFrutoInput,
+                    plantas.flor=florInput,
+                    plantas.usosConocidos=usosConocidosInput,
+                    plantas.paisajeRecomendado=paisajeRecomendadoInput,
 
-            nombreComunInput,
-            nombreCientificoInput,
-            origenInput,
-            minRangoAltitudinalInput,
-            maxRangoAltitudinalInput,
-            metrosInput,
-            requerimientosDeLuzInput,
-            habitoInput,
-            frutosInput,
-            texturaFrutoInput,
-            florInput,
-            usosConocidosInput,
-            paisajeRecomendadoInput,
+                    plantas.borrado = False,
+                    plantas.ultimaActualizacion = NOW();
+            END IF;
+			RETURN True;
 
-            NOW(),
-            False
-        );
-        RETURN TRUE;
+        ELSE
+            INSERT INTO plantas(
+                idFamilia,
+                idFenologia,
+                idAgentePolinizador,
+                idMetodoDispersion,
 
+                nombreComun,
+                nombreCientifico,
+                origen,
+                minRangoAltitudinal,
+                maxRangoAltitudinal,
+                metros,
+                requerimientosDeLuz,
+                habito,
+                frutos,
+                texturaFruto,
+                flor,
+                usosConocidos,
+                paisajeRecomendado,
+
+                -- Mantenimineto
+                ultimaActualizacion,
+                borrado
+            )
+            VALUES(
+                idFamilia,
+                idFenologia,
+                idAgentePolinizador,
+                idMetodoDispersion,
+
+                nombreComunInput,
+                nombreCientificoInput,
+                origenInput,
+                minRangoAltitudinalInput,
+                maxRangoAltitudinalInput,
+                metrosInput,
+                requerimientosDeLuzInput,
+                habitoInput,
+                frutosInput,
+                texturaFrutoInput,
+                florInput,
+                usosConocidosInput,
+                paisajeRecomendadoInput,
+
+                NOW(),
+                False
+            );
+            RETURN TRUE;
+        END IF;
     END;
 $$ LANGUAGE PLPGSQL;
 
