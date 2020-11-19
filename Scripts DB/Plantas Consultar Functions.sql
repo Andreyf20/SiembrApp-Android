@@ -51,7 +51,7 @@ $$
                 LEFT JOIN fenologia FL ON P.idFenologia  = FL.idFenologia
                 LEFT JOIN agentePolinizador AP ON P.idAgentePolinizador = AP.idAgentePolinizador
                 LEFT JOIN metodoDispersion MD ON P.idMetodoDispersion = MD.idMetodoDispersion
-                WHERE LOWER(P.nombreComun) LIKE lower(filtro) or LOWER(P.nombreCientifico) LIKE lower(filtro) or LOWER(P.origen) LIKE lower(filtro) or LOWER(P.requerimientosDeLuz) LIKE lower(filtro) or LOWER(P.habito) LIKE lower(filtro) or LOWER(P.frutos) LIKE lower(filtro) or LOWER(P.texturaFruto) LIKE lower(filtro) or LOWER(P.flor) LIKE lower(filtro) or LOWER(P.usosConocidos) LIKE lower(filtro) or LOWER(P.paisajeRecomendado) LIKE lower(filtro) or LOWER(F.nombre) LIKE lower(filtro) or LOWER(FL.nombre) LIKE lower(filtro) or LOWER(AP.nombre) LIKE lower(filtro) or LOWER(MD.nombre) LIKE lower(filtro) and P.borrado = False;
+                WHERE LOWER(P.nombreComun) LIKE lower(filtro) or LOWER(P.nombreCientifico) LIKE lower(filtro) or LOWER(P.origen) LIKE lower(filtro) or LOWER(P.requerimientosDeLuz) LIKE lower(filtro) or LOWER(P.habito) LIKE lower(filtro) or LOWER(P.frutos) LIKE lower(filtro) or LOWER(P.texturaFruto) LIKE lower(filtro) or LOWER(P.flor) LIKE lower(filtro) or LOWER(P.usosConocidos) LIKE lower(filtro) or LOWER(P.paisajeRecomendado) LIKE lower(filtro) or LOWER(F.nombre) LIKE lower(filtro) or LOWER(FL.nombre) LIKE lower(filtro) or LOWER(AP.nombre) LIKE lower(filtro) or LOWER(MD.nombre) LIKE lower(filtro) or P.minRangoAltitudinal :: varchar = filtro or P.maxRangoAltitudinal :: varchar = filtro or P.metros :: varchar = filtro and P.borrado = False;
         ELSE
             RETURN QUERY
                 SELECT
@@ -88,6 +88,8 @@ $$
 LANGUAGE PLPGSQL;
 
 /*
-select * from spVerEspecie('*');
-select * from spVerEspecie('Saragundí');
+select * from spverplantas('*');
+select * from spverplantas('Saragundí');
+select * from spverplantas('senna reticulata');
+select * from spverplantas('500');
 */
