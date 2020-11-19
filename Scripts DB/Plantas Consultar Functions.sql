@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION spVerEspecie(especieInput varchar)
+CREATE OR REPLACE FUNCTION spverplantas(filtro varchar)
 RETURNS TABLE(
             familia varchar,
             fenologia varchar,
@@ -23,7 +23,7 @@ AS
 $$
     BEGIN
 
-        IF (especieInput NOT LIKE '*') THEN
+        IF (filtro NOT LIKE '*') THEN
             RETURN QUERY
                 SELECT
 
@@ -51,7 +51,7 @@ $$
                 LEFT JOIN fenologia FL ON P.idFenologia  = FL.idFenologia
                 LEFT JOIN agentePolinizador AP ON P.idAgentePolinizador = AP.idAgentePolinizador
                 LEFT JOIN metodoDispersion MD ON P.idMetodoDispersion = MD.idMetodoDispersion
-                WHERE LOWER(P.nombreComun) LIKE lower(especieInput) and P.borrado = False;
+                WHERE LOWER(P.nombreComun) LIKE lower(filtro) or LOWER(P.nombreCientifico) LIKE lower(filtro) or LOWER(P.origen) LIKE lower(filtro) or LOWER(P.requerimientosDeLuz) LIKE lower(filtro) or LOWER(P.habito) LIKE lower(filtro) or LOWER(P.frutos) LIKE lower(filtro) or LOWER(P.texturaFruto) LIKE lower(filtro) or LOWER(P.flor) LIKE lower(filtro) or LOWER(P.usosConocidos) LIKE lower(filtro) or LOWER(P.paisajeRecomendado) LIKE lower(filtro) or LOWER(F.nombre) LIKE lower(filtro) or LOWER(FL.nombre) LIKE lower(filtro) or LOWER(AP.nombre) LIKE lower(filtro) or LOWER(MD.nombre) LIKE lower(filtro) and P.borrado = False;
         ELSE
             RETURN QUERY
                 SELECT
