@@ -15,4 +15,11 @@
     <string name="nombre">Nombre</string>
     <string name="apellidos">Apellidos</string>
     <string name="siguiente">Siguiente</string>
+    <string name="trabajoLbl">Trabajo</string>
+    <string name="campanna">Campaña de reforestación</string>
+    <string name="otroLbl">Otro</string>
+    <string name="asadaLbl">Asada</string>
+    <string name="estadoLbl">Estado</string>
+    <string name="gobiernoLocalLbl">Gobierno local</string>
+    <string name="ongLbl">ONG</string>
 </resources>

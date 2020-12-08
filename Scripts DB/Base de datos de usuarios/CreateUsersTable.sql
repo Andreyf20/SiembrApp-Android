@@ -12,19 +12,24 @@ CREATE TABLE TipoOrganizacion(
 );
 
 CREATE TABLE public.Users(
-
+	
+	-- Llaves
     idUsuario SERIAL PRIMARY KEY,
-
+	
+	idTipoOrganizacion bigint NOT NULL,
+	
+	-- Usuario
     nombre varchar NOT NULL,
 
     correo varchar NOT NULL,
 	
 	contrasenna varchar NOT NULL,
 	
-	idTipoOrganizacion bigint NOT NULL,
-	
+	-- Otros datos
 	nombreOrganizacion varchar NOT NULL,
+	razon varchar NOT  NULL,
 	
+	-- Trazabilidad
     ultimaActualizacion TIMESTAMPTZ NOT NULL,
     borrado boolean NOT NULL,
 	

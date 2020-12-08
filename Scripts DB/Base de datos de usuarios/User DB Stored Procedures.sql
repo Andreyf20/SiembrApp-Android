@@ -18,7 +18,8 @@ CREATE OR REPLACE FUNCTION spCrearUsuario(
     correoInput varchar,
     contrasennaInput varchar,
 	tipoOrganizacionInput varchar,
-	nombreOrganizacionInput varchar
+	nombreOrganizacionInput varchar,
+	razonInput varchar
 )
 RETURNS BOOLEAN
 AS $$
@@ -48,6 +49,7 @@ AS $$
                     contrasenna,
                     idTipoOrganizacion,
 					nombreOrganizacion,
+					razon,
                     ultimaActualizacion,
                     borrado
                 )
@@ -57,6 +59,7 @@ AS $$
                     Crypt(contrasennaInput,'md5'),
                     idTipoOrganizacion,
 					nombreOrganizacionInput,
+					razonInput,
                     NOW(),
                     FALSE
                 );
@@ -134,9 +137,9 @@ RETURNS BOOLEAN AS $$
 	END;
 $$ LANGUAGE PLPGSQL;
 
-select spCrearTipoOrganizacion('Uso personal') as success;
 select spCrearTipoOrganizacion('Asada') as success;
 select spCrearTipoOrganizacion('Estado') as success;
 select spCrearTipoOrganizacion('Gobierno local') as success;
 select spCrearTipoOrganizacion('ONG') as success;
+select spCrearTipoOrganizacion('Otro') as success;
 select * from TipoOrganizacion;
