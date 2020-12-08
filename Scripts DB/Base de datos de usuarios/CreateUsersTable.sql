@@ -1,5 +1,15 @@
-
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS TipoOrganizacion;
+
+CREATE TABLE TipoOrganizacion(
+
+	idTipoOrganizacion SERIAL PRIMARY KEY,
+	
+	nombre varchar NOT NULL,
+	
+	ultimaActualizacion TIMESTAMPTZ NULL,
+    borrado boolean NOT NULL
+);
 
 CREATE TABLE public.Users(
 
@@ -11,11 +21,13 @@ CREATE TABLE public.Users(
 	
 	contrasenna varchar NOT NULL,
 	
-    trabajaAsada boolean NOT NULL,
-
-    ubicacion varchar NOT NULL,
-
-    ultimaActualizacion TIMESTAMP NOT NULL,
-    borrado boolean NOT NULL
-
+	idTipoOrganizacion bigint NOT NULL,
+	
+	nombreOrganizacion varchar NOT NULL,
+	
+    ultimaActualizacion TIMESTAMPTZ NOT NULL,
+    borrado boolean NOT NULL,
+	
+	FOREIGN KEY(idTipoOrganizacion)
+		REFERENCES TipoOrganizacion MATCH SIMPLE
 );

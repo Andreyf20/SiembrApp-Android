@@ -1,3 +1,6 @@
+
+SET timezone = 'America/Costa_Rica';
+
 -- Agregar nuevo tipo de familia
 CREATE OR REPLACE FUNCTION spAgregarFamilia(
 
@@ -21,6 +24,7 @@ AS $$
 
                     familia.borrado = False,
                     familia.ultimaActualizacion = NOW();
+                    
             END IF;
 			RETURN True;
 
