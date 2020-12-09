@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.example.siembrapp.R;
 import com.example.siembrapp.register.RegisterActivity_Step_1;
 
-
 import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
