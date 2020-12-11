@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,14 +24,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.example.siembrapp.API.RequestHandler;
 import com.example.siembrapp.R;
 import com.example.siembrapp.register.RegisterActivity_Step_1;
-
-import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private RequestQueue rq;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
+
+        rq = RequestHandler.RequestQueueInstance.getRequestQueue(getApplicationContext());
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
@@ -124,13 +128,12 @@ public class LoginActivity extends AppCompatActivity {
         registerEditText.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Clicked registered button.", Toast.LENGTH_SHORT).show();
+                RequestHandler.Requester.request("http://127.0.0.1:5000/api/ver_plantas/1000",rq);
 
                 Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity_Step_1.class);
                 startActivity(registerIntent);
             }
         }));
-
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
