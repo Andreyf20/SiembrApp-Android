@@ -1,5 +1,7 @@
 package com.example.siembrapp;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
