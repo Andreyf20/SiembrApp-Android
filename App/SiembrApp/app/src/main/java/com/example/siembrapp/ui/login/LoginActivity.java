@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.example.siembrapp.API.RequestHandler;
+import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
 import com.example.siembrapp.register.RegisterActivity_Step_1;
 
@@ -119,9 +120,12 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                /*loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        passwordEditText.getText().toString());*/
+
+                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(mainIntent);
             }
         });
 

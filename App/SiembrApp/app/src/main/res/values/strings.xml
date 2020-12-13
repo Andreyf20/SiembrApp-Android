@@ -22,4 +22,8 @@
     <string name="estadoLbl">Estado</string>
     <string name="gobiernoLocalLbl">Gobierno local</string>
     <string name="ongLbl">ONG</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="misarboles">Mis arboles</string>
+    <string name="quesembrar">¿Que sembrar?</string>
+    <string name="viveros">Viveros</string>
 </resources>
