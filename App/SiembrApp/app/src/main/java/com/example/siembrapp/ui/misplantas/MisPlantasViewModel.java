@@ -1,14 +1,14 @@
-package com.example.siembrapp.ui.home;
+package com.example.siembrapp.ui.misplantas;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class MisPlantasViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public MisPlantasViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
     }
