@@ -26,4 +26,18 @@
     <string name="misarboles">Mis arboles</string>
     <string name="quesembrar">¿Que sembrar?</string>
     <string name="viveros">Viveros</string>
+
+    <string name="familialbl">Familia</string>
+    <string name="origenLbl">Origen</string>
+    <string name="tamannoLbl">Tamaño</string>
+    <string name="rangoaltitudinalLbl">Rango altitudinal</string>
+    <string name="requerimientosluzLbl">Requerimientos de luz</string>
+    <string name="fenologiaLlb">Fenologia</string>
+    <string name="frutoLbl">Fruto</string>
+    <string name="texturaFrutoLbl">Textura del fruto</string>
+    <string name="florLbl">Flor</string>
+    <string name="agentePolinizadorLbl">Agente polinizador</string>
+    <string name="metododispersionLbl">Método de dispersión</string>
+    <string name="usosLbl">Usos conocidos</string>
+
 </resources>

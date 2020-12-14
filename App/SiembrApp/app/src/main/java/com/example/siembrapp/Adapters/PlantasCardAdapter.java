@@ -1,6 +1,7 @@
 package com.example.siembrapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
 import com.example.siembrapp.data.model.Planta;
+import com.example.siembrapp.ui.detallesPlanta.DetallePlantaActivity;
 
 import java.util.List;
 
@@ -28,12 +31,14 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
 
         public TextView text;
         public ImageView img;
+        public CardView card;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             text = (TextView) itemView.findViewById(R.id.infoTV);
             img = (ImageView) itemView.findViewById(R.id.fotoIV);
+            card = (CardView) itemView.findViewById(R.id.plantaCard);
         }
     }
 
@@ -44,11 +49,12 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.planta_info_basica_item, parent, false);
+        View plantasView = inflater.inflate(R.layout.planta_info_basica_item, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(plantasView);
         return viewHolder;
+
     }
 
     @Override
@@ -59,10 +65,19 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
         TextView text = holder.text;
         text.setText(planta.getInfoBasica());
 
-
         // Foto de icono eucalyptus temporalmente
         ImageView img = holder.img;
         img.setImageResource(R.drawable.ic_eucalyptus);
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent detallePlantaIntent = new Intent(v.getContext(), DetallePlantaActivity.class);
+                v.getContext().startActivity(detallePlantaIntent);
+            }
+        });
+
     }
 
     @Override

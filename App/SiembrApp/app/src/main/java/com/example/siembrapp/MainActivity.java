@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-
         //Back button to toolbar
         Toolbar mainActivityToolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainactivitytoolbar);
         setSupportActionBar(mainActivityToolbar);
