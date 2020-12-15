@@ -37,7 +37,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="64dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/rounded_corners"
         android:ellipsize="none"
         android:enabled="false"
         android:text="@string/action_sign_in_short"
