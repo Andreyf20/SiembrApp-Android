@@ -39,7 +39,7 @@
         android:layout_marginBottom="64dp"
         android:background="@drawable/rounded_corners"
         android:ellipsize="none"
-        android:enabled="false"
+        android:enabled="true"
         android:text="@string/action_sign_in_short"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -47,6 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         final TextView registerEditText = findViewById(R.id.registerHyperlink);
 
-    }
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent homeIntent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(homeIntent);
+
+            }
+        });
+    }
 }
