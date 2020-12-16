@@ -24,6 +24,9 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,37 +34,14 @@ import java.util.Map;
 
 public class RequestHandler {
 
+    /***
+     * Static class for doing requests
+     */
     public static class Requester {
 
-        static GsonBuilder builder = new GsonBuilder();
-        static final Gson gson = builder.setPrettyPrinting().create();
         static final String APIURL = "http://192.168.50.37:5000/";
 
-        /*public static void request(String url, RequestQueue requestQueue){
-
-            JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        //JSONArray array = response.toJSONArray(response.names());
-                        String json = gson.toJson(response);
-                        Log.d("XD", json);
-
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        Log.d("XD",error.toString());
-                    }
-                });
-            requestQueue.add(jsonObjectRequest);
-        }*/
-
-        public static void login(final String email, final String password, RequestQueue requestQueue, final VolleyCallBack callBack) {
+        public static void login(final String correo, final String contrasenna, RequestQueue requestQueue, final VolleyCallBack callBack) {
             String url = APIURL + "api/login";
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -94,8 +74,15 @@ public class RequestHandler {
                     }){
                 @Override
                 public byte[] getBody() {
-                    String jsonString= "{\"correo\":\""+email+"\",\"contrasenna\":\""+password+"\"}";
-                    return jsonString.getBytes();
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("correo",correo);
+                        jsonObject.put("contrasenna",contrasenna);
+                        return jsonObject.toString().getBytes();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
                 }
                 @Override
                 public String getBodyContentType() {
@@ -104,8 +91,18 @@ public class RequestHandler {
             };
             requestQueue.add(jsonObjectRequest);
         }
+
+        private static void updateLoggedInUserInfo(String correo){
+
+            
+
+        }
+
     }
-    //Ref: https://stackoverflow.com/questions/29442977/volley-jsonobjectrequest-post-parameters-no-longer-work
+
+    /**
+     * Singleton class to get the instance of RequestQueue
+     */
     public static class RequestQueueInstance{
 
         private static RequestQueue requestQueue;

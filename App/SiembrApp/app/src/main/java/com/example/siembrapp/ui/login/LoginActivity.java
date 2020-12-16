@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         final TextView registerEditText = findViewById(R.id.registerHyperlink);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
                 RequestHandler.Requester.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(), rq, new VolleyCallBack() {
                     @Override
                     public void onSuccess() {
+                        Toast.makeText(getApplicationContext(), "¡Bienvenido!", Toast.LENGTH_SHORT).show();
+
+
                         Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(homeIntent);
                     }
@@ -53,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
             }
         });
