@@ -16,17 +16,19 @@ import com.example.siembrapp.API.RequestHandler;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
+import com.example.siembrapp.data.model.LoggedInUser;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private RequestQueue rq;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        rq = RequestHandler.RequestQueueInstance.getRequestQueue(getApplicationContext());
+        final RequestQueue requestQueue = RequestHandler.RequestQueueInstance.getRequestQueue(getApplicationContext());
+
+        // Limpiar el objeto porque estamos en login screen
+        LoggedInUser.LoggedUser.setLoggedUser(null);
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
@@ -40,14 +42,26 @@ public class LoginActivity extends AppCompatActivity {
             if (usernameEditText.getText().length()==0 || passwordEditText.getText().length() ==0){
                 Toast.makeText(getApplicationContext(), R.string.camposvacios, Toast.LENGTH_SHORT).show();
             }else{
-                RequestHandler.Requester.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(), rq, new VolleyCallBack() {
+                RequestHandler.Requester.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(),requestQueue, new VolleyCallBack() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(getApplicationContext(), "¡Bienvenido!", Toast.LENGTH_SHORT).show();
 
 
-                        Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(homeIntent);
+                        // Set logged in user
+                        RequestHandler.Requester.updateLoggedInUserInfo(usernameEditText.getText().toString(),requestQueue,new VolleyCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(getApplicationContext(), "Bienvenido "+LoggedInUser.LoggedUser.getLoggedUser().getNombre(), Toast.LENGTH_SHORT).show();
+                                Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(homeIntent);
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                //Ignore
+                            }
+                        });
+
                     }
 
                     @Override

@@ -17,6 +17,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
+import com.example.siembrapp.data.model.LoggedInUser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -41,7 +42,7 @@ public class RequestHandler {
 
         static final String APIURL = "http://192.168.50.37:5000/";
 
-        public static void login(final String correo, final String contrasenna, RequestQueue requestQueue, final VolleyCallBack callBack) {
+        public static void login(final String correo, final String contrasenna,RequestQueue requestQueue, final VolleyCallBack callBack) {
             String url = APIURL + "api/login";
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -92,9 +93,64 @@ public class RequestHandler {
             requestQueue.add(jsonObjectRequest);
         }
 
-        private static void updateLoggedInUserInfo(String correo){
+        public static void updateLoggedInUserInfo(final String correo,RequestQueue requestQueue,final VolleyCallBack callBack){
+            String url = APIURL + "api/getUserInfo";
 
-            
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //On response actions
+                            try{
+                                String correo = response.getString("correo");
+                                String uuid = response.getString("uuid");
+                                String nombre = response.getString("nombre");
+
+                                if (!correo.equals("null") && !uuid.equals("null") && !nombre.equals("null")){
+                                    //Set del logged in user
+                                    LoggedInUser.LoggedInUserBuilder builder = new LoggedInUser.LoggedInUserBuilder();
+                                    builder.setCorreo(correo).setUuid(uuid).setNombre(nombre);
+
+                                    LoggedInUser.LoggedUser.setLoggedUser(builder.build());
+
+                                    callBack.onSuccess();
+                                    return;
+                                }
+                                callBack.onFailure();
+
+                            }catch(JSONException e){
+                                e.printStackTrace();
+                                callBack.onFailure();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO: Handle error
+                            error.printStackTrace();
+                            callBack.onFailure();
+                        }
+                    }){
+                @Override
+                public byte[] getBody() {
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        //parameter puts
+                        jsonObject.put("correo",correo);
+                        return jsonObject.toString().getBytes();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+            };
+            requestQueue.add(jsonObjectRequest);
 
         }
 

@@ -4,19 +4,22 @@ package com.example.siembrapp.data.model;
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */
 public class LoggedInUser {
-    public static LoggedInUser loggedUser;
-
-    public static LoggedInUser getLoggedUser() {
-        return loggedUser;
-    }
-
-    public static void setLoggedUser(LoggedInUser loggedUser) {
-        LoggedInUser.loggedUser = loggedUser;
-    }
 
     private String correo;
     private String uuid;
     private String nombre;
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 
     public LoggedInUser(LoggedInUserBuilder builder) {
         this.correo = builder.correo;
@@ -45,4 +48,21 @@ public class LoggedInUser {
             return this;
         }
 
+        public LoggedInUser build(){
+            return new LoggedInUser(this);
+        }
+    }
+
+    public static class LoggedUser{
+
+        private static LoggedInUser loggedUser;
+
+        public static LoggedInUser getLoggedUser() {
+            return loggedUser;
+        }
+
+        public static void setLoggedUser(LoggedInUser loggedUser) {
+            LoggedUser.loggedUser = loggedUser;
+        }
+    }
 }
