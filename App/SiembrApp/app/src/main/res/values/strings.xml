@@ -26,7 +26,6 @@
     <string name="misarboles">Mis arboles</string>
     <string name="quesembrar">¿Que sembrar?</string>
     <string name="viveros">Viveros</string>
-
     <string name="familialbl">Familia</string>
     <string name="origenLbl">Origen</string>
     <string name="tamannoLbl">Tamaño</string>
@@ -39,5 +38,5 @@
     <string name="agentePolinizadorLbl">Agente polinizador</string>
     <string name="metododispersionLbl">Método de dispersión</string>
     <string name="usosLbl">Usos conocidos</string>
-
+    <string name="camposvacios">Hay campos vacíos!</string>
 </resources>
