@@ -24,7 +24,8 @@ public class DetallePlantaActivity extends AppCompatActivity {
         Planta plantaFocused = (Planta) intent.getSerializableExtra("planta");
         ImageButton backBtn = findViewById(R.id.detallesPlantaBackBtn);
 
-        TextView nombreComunTV, nombreCientificoTV,familiaTV,origenTV,habitoTV,rangoTV,requerimientosLuzTV,fenologiaTV,polinizadorTV,dispersionTV,frutoTV,texturaFrutaTV,florTV,usosTV;
+        // Referencias a componentes graficos
+        TextView nombreComunTV, nombreCientificoTV,familiaTV,origenTV,habitoTV,rangoTV,requerimientosLuzTV,fenologiaTV,polinizadorTV,dispersionTV,frutoTV,texturaFrutaTV,florTV,usosTV,paisajesTV;
 
         nombreComunTV = findViewById(R.id.nombreComunTV);
         nombreCientificoTV = findViewById(R.id.nombreCientificoTV);
@@ -39,6 +40,8 @@ public class DetallePlantaActivity extends AppCompatActivity {
         frutoTV = findViewById(R.id.frutoTV);
         texturaFrutaTV =findViewById(R.id.texturafrutoTV);
         florTV = findViewById(R.id.florTV);
+        usosTV = findViewById(R.id.usosConocidosTV);
+        paisajesTV = findViewById(R.id.paisajesRecomendadosTV);
 
         nombreComunTV.setText(plantaFocused.getNombreComun());
         nombreCientificoTV.setText(plantaFocused.getNombreCientifico());
@@ -56,8 +59,9 @@ public class DetallePlantaActivity extends AppCompatActivity {
         String rangoAltitudinal = plantaFocused.getMinRangoAltitudinal() +" - "+ plantaFocused.getMaxRangoAltitudinal() + " msnm";
         rangoTV.setText(rangoAltitudinal);
 
+        usosTV.setText(plantaFocused.getUsosConocidosString());
 
-        Toast.makeText(getApplicationContext(), plantaFocused.getNombreComun(), Toast.LENGTH_SHORT).show();
+        paisajesTV.setText(plantaFocused.getPaisajesRecomendadosString());
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

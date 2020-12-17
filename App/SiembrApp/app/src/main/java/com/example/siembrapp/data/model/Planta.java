@@ -79,7 +79,6 @@ public class Planta implements Serializable {
         return fruto;
     }
 
-
     public String getTexturaFruto() {
         return texturaFruto;
     }
@@ -98,6 +97,30 @@ public class Planta implements Serializable {
 
     public ArrayList<String> getUsosConocidos() {
         return usosConocidos;
+    }
+
+    public String getUsosConocidosString()
+    {
+        StringBuilder str = new StringBuilder();
+
+        for(int i=0;i < usosConocidos.size()-1; i++){
+            str.append(usosConocidos.get(i));
+            str.append(' ');
+        }
+        str.append(usosConocidos.get(usosConocidos.size()-1)); // Para no agregar un espacio al final
+        return str.toString();
+    }
+
+    public String getPaisajesRecomendadosString()
+    {
+        StringBuilder str = new StringBuilder();
+
+        for(int i=0;i < paisajeRecomendado.size()-1; i++){
+            str.append(paisajeRecomendado.get(i));
+            str.append(' ');
+        }
+        str.append(paisajeRecomendado.get(paisajeRecomendado.size()-1)); // Para no agregar un espacio al final
+        return str.toString();
     }
 
     public double getMinRangoAltitudinal() {
