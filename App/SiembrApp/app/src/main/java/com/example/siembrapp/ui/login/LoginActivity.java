@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess() {
 
-
                         // Set logged in user
                         RequestHandler.Requester.updateLoggedInUserInfo(usernameEditText.getText().toString(),requestQueue,new VolleyCallBack() {
                             @Override
@@ -60,13 +59,33 @@ public class LoginActivity extends AppCompatActivity {
                             public void onFailure() {
                                 //Ignore
                             }
+
+                            @Override
+                            public void noConnection() {
+                                Toast.makeText(getApplicationContext(), R.string.connectionError, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void timedOut() {
+                                Toast.makeText(getApplicationContext(), R.string.timedouterror, Toast.LENGTH_SHORT).show();
+                            }
                         });
 
                     }
 
                     @Override
                     public void onFailure() {
-                        Toast.makeText(getApplicationContext(), "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.loginError, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void noConnection() {
+                        Toast.makeText(getApplicationContext(), R.string.connectionError, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void timedOut() {
+                        Toast.makeText(getApplicationContext(),R.string.timedouterror, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

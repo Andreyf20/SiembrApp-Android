@@ -1,14 +1,28 @@
 package com.example.siembrapp.data.model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class User {
 
     private String nombre, correo, nombreOrganizacion, razon;
+
+    ArrayList<Planta> plantas;
 
     private User(UserBuilder builder){
         this.nombre = builder.nombre;
         this.correo = builder.correo;
         this.nombreOrganizacion = builder.nombreOrganizacion;
         this.razon = builder.razon;
+        plantas = new ArrayList<>();
+    }
+
+    public void agregarPlanta(Planta nuevaPlanta){
+        this.plantas.add(nuevaPlanta);
+    }
+
+    public void setPlantas(ArrayList<Planta> plantas){
+        this.plantas = plantas;
     }
 
     public String getNombre() {

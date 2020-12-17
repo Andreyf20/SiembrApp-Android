@@ -16,6 +16,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -24,14 +26,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
         //Back button to toolbar
-        Toolbar mainActivityToolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainactivitytoolbar);
+        Toolbar mainActivityToolbar = findViewById(R.id.mainactivitytoolbar);
         setSupportActionBar(mainActivityToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mainActivityToolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,7 @@
 package com.example.siembrapp.data.model;
 
+import java.util.ArrayList;
+
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */
@@ -8,6 +10,8 @@ public class LoggedInUser {
     private String correo;
     private String uuid;
     private String nombre;
+
+    private ArrayList<Planta> plantasUsuario;
 
     public String getCorreo() {
         return correo;
@@ -19,6 +23,14 @@ public class LoggedInUser {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setPlantas(ArrayList<Planta> plantas){
+        this.plantasUsuario = plantas;
+    }
+
+    public ArrayList<Planta> getPlantasUsuario(){
+        return plantasUsuario;
     }
 
     public LoggedInUser(LoggedInUserBuilder builder) {

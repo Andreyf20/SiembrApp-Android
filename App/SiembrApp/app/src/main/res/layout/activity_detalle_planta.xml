@@ -36,7 +36,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/nombreComun"
+                    android:id="@+id/nombreComunTV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -48,7 +48,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/nombreCientifico"
+                    android:id="@+id/nombreCientificoTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -104,7 +104,7 @@
                                 android:text="@string/familialbl" />
 
                             <TextView
-                                android:id="@+id/familiaText"
+                                android:id="@+id/familiaTV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="10"
@@ -138,7 +138,7 @@
                                 android:text="@string/origenLbl" />
 
                             <TextView
-                                android:id="@+id/origenText"
+                                android:id="@+id/origenTV"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="10"
@@ -181,10 +181,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="5dp"
-                                    android:text="@string/fenologiaLlb" />
+                                    android:text="@string/habito" />
 
                                 <TextView
-                                    android:id="@+id/fenologiaTV"
+                                    android:id="@+id/habitoTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="5"
@@ -271,7 +271,7 @@
                                     android:textAlignment="center" />
 
                                 <TextView
-                                    android:id="@+id/rangoAltitudinal"
+                                    android:id="@+id/rangoAltitudinalTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
@@ -301,7 +301,7 @@
                                     android:textAlignment="center" />
 
                                 <TextView
-                                    android:id="@+id/requerimientosLuz"
+                                    android:id="@+id/requerimientosLuzTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
@@ -330,7 +330,7 @@
                                     android:textAlignment="center" />
 
                                 <TextView
-                                    android:id="@+id/fenologia"
+                                    android:id="@+id/fenologiaTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
@@ -360,7 +360,7 @@
                                     android:textAlignment="center" />
 
                                 <TextView
-                                    android:id="@+id/agentePolinizador"
+                                    android:id="@+id/agentePolinizadorTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
@@ -390,7 +390,7 @@
                                     android:textAlignment="center" />
 
                                 <TextView
-                                    android:id="@+id/metododispersionlbl"
+                                    android:id="@+id/metododispersionTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"

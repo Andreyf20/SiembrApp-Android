@@ -2,6 +2,7 @@ package com.example.siembrapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,9 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
         public ViewHolder(View itemView){
             super(itemView);
 
-            text = (TextView) itemView.findViewById(R.id.infoTV);
-            img = (ImageView) itemView.findViewById(R.id.fotoIV);
-            card = (CardView) itemView.findViewById(R.id.plantaCard);
+            text = itemView.findViewById(R.id.infoTV);
+            img = itemView.findViewById(R.id.fotoIV);
+            card = itemView.findViewById(R.id.plantaCard);
         }
     }
 
@@ -60,7 +61,7 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Planta planta = plantas.get(position);
+        final Planta planta = plantas.get(position);
 
         TextView text = holder.text;
         text.setText(planta.getInfoBasica());
@@ -74,6 +75,7 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
             public void onClick(View v) {
 
                 Intent detallePlantaIntent = new Intent(v.getContext(), DetallePlantaActivity.class);
+                detallePlantaIntent.putExtra("planta", planta);
                 v.getContext().startActivity(detallePlantaIntent);
             }
         });

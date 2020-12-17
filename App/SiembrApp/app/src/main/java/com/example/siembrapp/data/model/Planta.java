@@ -6,12 +6,13 @@ import android.widget.LinearLayout;
 
 import androidx.cardview.widget.CardView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Planta {
+public class Planta implements Serializable {
 
-    private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,paisajeRecomendado,habito;
-    private ArrayList<String> usosConocidos;
+    private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,habito;
+    private ArrayList<String> usosConocidos,paisajeRecomendado;
     private double minRangoAltitudinal,maxRangoAltitudinal,metros;
 
     private Planta(PlantaBuilder builder){
@@ -87,7 +88,7 @@ public class Planta {
         return flor;
     }
 
-    public String getPaisajeRecomendado() {
+    public ArrayList<String> getPaisajeRecomendado() {
         return paisajeRecomendado;
     }
 
@@ -122,8 +123,8 @@ public class Planta {
 
     public static class PlantaBuilder{
 
-        private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,paisajeRecomendado,habito;
-        private ArrayList<String> usosConocidos;
+        private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,habito;
+        private ArrayList<String> usosConocidos,paisajeRecomendado;
         private double minRangoAltitudinal,maxRangoAltitudinal,metros;
 
         public PlantaBuilder setNombreComun(String nombreComun) {
@@ -181,7 +182,7 @@ public class Planta {
             return this;
         }
 
-        public PlantaBuilder setPaisajeRecomendado(String paisajeRecomendado) {
+        public PlantaBuilder setPaisajeRecomendado(ArrayList<String> paisajeRecomendado) {
             this.paisajeRecomendado = paisajeRecomendado;
             return this;
         }
