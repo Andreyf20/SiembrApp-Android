@@ -40,7 +40,10 @@
     <string name="usosLbl">Usos conocidos</string>
     <string name="camposvacios">Hay campos vacíos!</string>
     
-    <string name="timedouterror">Timed out</string>
+    <string name="timedouterror">Servidor no responde</string>
     <string name="connectionError">Error de conexión</string>
     <string name="loginError">Error al iniciar sesión</string>
+    <string name="getuserinfoerror">No se consiguio datos de usuario</string>
+    <string name="errorAlParsear">Error de parse</string>
+    <string name="Success">SUCCESS</string>
 </resources>

@@ -36,9 +36,9 @@ public class MisPlantasFragment extends Fragment {
 
         plantasrv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        PlantasCardAdapter adapter = new PlantasCardAdapter(LoggedInUser.LoggedUser.getLoggedUser().getPlantasUsuario());
+        //PlantasCardAdapter adapter = new PlantasCardAdapter(LoggedInUser.LoggedUser.getLoggedUser().getPlantasUsuario());
 
-        plantasrv.setAdapter(adapter);
+        //plantasrv.setAdapter(adapter);
 
         return root;
     }

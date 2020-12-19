@@ -5,16 +5,21 @@ import java.util.ArrayList;
 
 public class User {
 
-    private String nombre, correo, nombreOrganizacion, razon;
+    private String uuid, nombre, correo, tipoOrganizacion, razon;
 
     ArrayList<Planta> plantas;
 
     private User(UserBuilder builder){
+        this.nombre = builder.uuid;
         this.nombre = builder.nombre;
         this.correo = builder.correo;
-        this.nombreOrganizacion = builder.nombreOrganizacion;
+        this.tipoOrganizacion = builder.tipoOrganizacion;
         this.razon = builder.razon;
         plantas = new ArrayList<>();
+    }
+
+    public String getUuid(){
+        return this.uuid;
     }
 
     public void agregarPlanta(Planta nuevaPlanta){
@@ -41,12 +46,12 @@ public class User {
         this.correo = correo;
     }
 
-    public String getNombreOrganizacion() {
-        return nombreOrganizacion;
+    public String getTipoOrganizacion() {
+        return tipoOrganizacion;
     }
 
-    public void setNombreOrganizacion(String nombreOrganizacion) {
-        this.nombreOrganizacion = nombreOrganizacion;
+    public void setTipoOrganizacion(String tipoOrganizacion) {
+        this.tipoOrganizacion = tipoOrganizacion;
     }
 
     public String getRazon() {
@@ -58,7 +63,12 @@ public class User {
     }
 
     public static class UserBuilder{
-        private String nombre, correo, nombreOrganizacion, razon;
+        private String uuid, nombre, correo, tipoOrganizacion, razon;
+
+        public UserBuilder setUUID(String uuid){
+            this.uuid = uuid;
+            return this;
+        }
 
         public UserBuilder setNombre(String nombre) {
             this.nombre = nombre;
@@ -70,8 +80,8 @@ public class User {
             return this;
         }
 
-        public UserBuilder setNombreOrganizacion(String nombreOrganizacion) {
-            this.nombreOrganizacion = nombreOrganizacion;
+        public UserBuilder setTipoOrganizacion(String tipoOrganizacion) {
+            this.tipoOrganizacion = tipoOrganizacion;
             return this;
         }
 
