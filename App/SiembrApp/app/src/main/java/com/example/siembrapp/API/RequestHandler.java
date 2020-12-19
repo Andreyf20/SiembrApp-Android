@@ -2,7 +2,6 @@ package com.example.siembrapp.API;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -13,14 +12,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
-import com.example.siembrapp.R;
-import com.example.siembrapp.data.model.God;
-import com.example.siembrapp.data.model.RequestResponse;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 public class RequestHandler {
 
@@ -60,6 +55,8 @@ public class RequestHandler {
     // Modos
     public static final int LOGIN = 1;
     public static final int GETUSERINFO = 2;
+    public static final int GETUSERID = 3;
+    public static final int GETPLANTASDEUSUARIO = 4;
 
     //JSONObject, MODE.LOGIN
     public static class APIRequester{
@@ -73,10 +70,17 @@ public class RequestHandler {
                 case LOGIN:
 
                     login(object,ctx,callback);
+                    break;
 
                 case GETUSERINFO:
 
                     getUserInfo(object,ctx,callback);
+                    break;
+
+                /*case GETPLANTAS:
+
+                    getPlantas(object,ctx,callback);
+                    break;*/
 
                 default:
 
@@ -94,8 +98,9 @@ public class RequestHandler {
                 public void onResponse(JSONObject response) {
 
                     try {
-                        RequestResponse.setResponseObject(response.getJSONObject("info"));
-                        callback.onSuccess();
+
+                        JSONObject info = response.getJSONObject("info");
+                        callback.onSuccess(info);
 
                     } catch (JSONException exception) {
                         exception.printStackTrace();
@@ -132,8 +137,7 @@ public class RequestHandler {
                 @Override
                 public void onResponse(JSONObject response) {
 
-                    RequestResponse.setResponseObject(response);
-                    callback.onSuccess();
+                    callback.onSuccess(response);
                 }
             };
             //Instanciar error listener
@@ -153,6 +157,35 @@ public class RequestHandler {
             };
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyParams,responseListener,errorListener);
             RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
+        }
+
+        private static void getUserID(JSONObject bodyParams,Context ctx,final VolleyCallBack callback){
+            //Request url
+            String url = APIURL +"getid";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    callback.onSuccess(response);
+                }
+            };
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
         }
     }
 }

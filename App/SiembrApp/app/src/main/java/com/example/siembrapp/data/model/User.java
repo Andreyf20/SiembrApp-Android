@@ -15,6 +15,7 @@ public class User {
         this.correo = builder.correo;
         this.tipoOrganizacion = builder.tipoOrganizacion;
         this.razon = builder.razon;
+        this.uuid = builder.uuid;
         plantas = new ArrayList<>();
     }
 
