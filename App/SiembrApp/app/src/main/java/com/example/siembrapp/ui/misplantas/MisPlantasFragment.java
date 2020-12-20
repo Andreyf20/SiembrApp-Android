@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.siembrapp.Adapters.PlantasCardAdapter;
 import com.example.siembrapp.R;
+import com.example.siembrapp.data.model.God;
 
 public class MisPlantasFragment extends Fragment {
 
@@ -27,13 +29,11 @@ public class MisPlantasFragment extends Fragment {
 
         plantasrv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //PlantasCardAdapter adapter = new PlantasCardAdapter(Session.LoggedUser.getLoggedUser().getPlantasUsuario());
+        PlantasCardAdapter adapter = new PlantasCardAdapter(God.getLoggedUser().getPlantas());
 
-        //plantasrv.setAdapter(adapter);
+        plantasrv.setAdapter(adapter);
 
         return root;
     }
-
-
 
 }

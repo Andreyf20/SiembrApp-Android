@@ -1,13 +1,17 @@
 package com.example.siembrapp.data.model;
 
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
 
-    private String uuid, nombre, correo, tipoOrganizacion, razon;
+    private final String uuid;
+    private String nombre;
+    private String correo;
+    private String tipoOrganizacion;
+    private String razon;
 
-    ArrayList<Planta> plantas;
+    private ArrayList<Planta> plantas;
 
     private User(UserBuilder builder){
         this.nombre = builder.uuid;
@@ -17,6 +21,10 @@ public class User {
         this.razon = builder.razon;
         this.uuid = builder.uuid;
         plantas = new ArrayList<>();
+    }
+
+    public ArrayList<Planta> getPlantas(){
+        return this.plantas;
     }
 
     public String getUuid(){
@@ -33,34 +41,6 @@ public class User {
 
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTipoOrganizacion() {
-        return tipoOrganizacion;
-    }
-
-    public void setTipoOrganizacion(String tipoOrganizacion) {
-        this.tipoOrganizacion = tipoOrganizacion;
-    }
-
-    public String getRazon() {
-        return razon;
-    }
-
-    public void setRazon(String razon) {
-        this.razon = razon;
     }
 
     public static class UserBuilder{

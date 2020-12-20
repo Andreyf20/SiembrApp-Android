@@ -56,7 +56,7 @@ public class RequestHandler {
     public static final int LOGIN = 1;
     public static final int GETUSERINFO = 2;
     public static final int GETUSERID = 3;
-    public static final int GETPLANTASDEUSUARIO = 4;
+    public static final int GETUSERPLANTAS = 4;
 
     //JSONObject, MODE.LOGIN
     public static class APIRequester{
@@ -77,14 +77,53 @@ public class RequestHandler {
                     getUserInfo(object,ctx,callback);
                     break;
 
-                /*case GETPLANTAS:
+                case GETUSERID:
+
+                    getUserID(object,ctx,callback);
+                    break;
+                case GETUSERPLANTAS:
 
                     getPlantas(object,ctx,callback);
-                    break;*/
+                    break;
 
                 default:
 
             }
+        }
+
+        private static void getPlantas(JSONObject bodyParams, Context ctx,final VolleyCallBack callback) {
+            //Request url
+            String url = APIURL + "getPlantasDeUsuario";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    callback.onSuccess(response);
+
+                }
+            };
+
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyParams,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
+
         }
 
         private static void getUserInfo(JSONObject bodyParams, Context ctx,final VolleyCallBack callback) {
@@ -167,7 +206,6 @@ public class RequestHandler {
             Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
                     callback.onSuccess(response);
                 }
             };
@@ -186,6 +224,9 @@ public class RequestHandler {
                     callback.onFailure();
                 }
             };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyParams,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
         }
     }
 }
