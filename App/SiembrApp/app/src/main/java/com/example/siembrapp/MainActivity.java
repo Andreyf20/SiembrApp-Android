@@ -1,8 +1,6 @@
 package com.example.siembrapp;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,20 +11,16 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.siembrapp.data.model.God;
-import com.example.siembrapp.data.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
-import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -46,22 +40,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setupUser();
+        Toast.makeText(getApplicationContext(), "Hola " +God.getLoggedUser().getNombre(), Toast.LENGTH_SHORT).show();
     }
-
-    private void setupUser() {
-        //Extraer el correo que se paso desde el loginactivity y pedirle a la clase God
-        //consultar la informacion del usuario para guardarla en SharedPreferences
-        God.setupUser(
-                getIntent().getStringExtra("correo"),getApplicationContext()
-        );
-
-        SharedPreferences preferences = getSharedPreferences("userinfo",MODE_PRIVATE);
-        String json = preferences.getString("info","{}");
-        Gson gson = new Gson();
-        User user = gson.fromJson(json,User.class);
-        Toast.makeText(getApplicationContext(), "Hola " +user.getNombre(), Toast.LENGTH_SHORT).show();
-
-    }
-
 }

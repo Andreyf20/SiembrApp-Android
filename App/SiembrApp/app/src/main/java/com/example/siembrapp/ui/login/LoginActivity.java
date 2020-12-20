@@ -2,6 +2,7 @@ package com.example.siembrapp.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,15 @@ import com.example.siembrapp.API.RequestHandler;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
-import com.example.siembrapp.data.model.Session;
+import com.example.siembrapp.data.model.God;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+
+    EditText usernameEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,12 +33,15 @@ public class LoginActivity extends AppCompatActivity {
         RequestHandler.RequestQueueSingleton.getInstance(this.getApplicationContext());
 
         // Limpiar el objeto porque estamos en login screen
-        Session.setLoggedUser(null);
+        God.logout(getApplicationContext());
 
-        final EditText usernameEditText = findViewById(R.id.username);
+        usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final TextView registerEditText = findViewById(R.id.registerHyperlink);
+
+        usernameEditText.setText("admin@siembrapp.com");
+        passwordEditText.setText("admin");
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +65,32 @@ public class LoginActivity extends AppCompatActivity {
                                 String response = object.getString("ok");
                                 if(response.equals("1")){
 
-                                    //Instanciamos el intent a la actividad de home y le pasamos la variable del correo
-                                    Intent mainActivityIntent = new Intent(getApplicationContext(),MainActivity.class);
-                                    mainActivityIntent.putExtra("correo",usernameEditText.getText().toString());
-                                    startActivity(mainActivityIntent);
+                                    setupUser(usernameEditText.getText().toString(),new VolleyCallBack() {
+
+                                        @Override
+                                        public void onSuccess(JSONObject object) {
+
+                                            //Ya el usuario esta setteado, podemos pasar de actividad
+                                            Intent mainActivityIntent = new Intent(getApplicationContext(),MainActivity.class);
+                                            startActivity(mainActivityIntent);
+
+                                        }
+
+                                        @Override
+                                        public void onFailure() {
+
+                                        }
+
+                                        @Override
+                                        public void noConnection() {
+
+                                        }
+
+                                        @Override
+                                        public void timedOut() {
+
+                                        }
+                                    });
 
                                 }else {
                                     Toast.makeText(getApplicationContext(), R.string.loginError, Toast.LENGTH_SHORT).show();
@@ -92,6 +120,90 @@ public class LoginActivity extends AppCompatActivity {
                     exception.printStackTrace();
                 }
             }
+            }
+        });
+    }
+
+    /**
+     * Conseguir la informacion del usuario que ingreso y sus plantas
+     */
+    private void setupUser(String correo,final VolleyCallBack callback) {
+
+        //Extraer el correo que se paso desde el loginactivity y pedirle a la clase God
+        //consultar la informacion del usuario para guardarla en SharedPreferences
+        God.setupUser(
+                correo,getApplicationContext(), new VolleyCallBack() {
+                    @Override
+                    public void onSuccess(JSONObject object) {
+                        //User ya existe, seguimos con sus plantas
+                        Log.d("XD",God.getLoggedUser().getUuid());
+                        getPlantasDelUsuario(new VolleyCallBack() {
+                            @Override
+                            public void onSuccess(JSONObject object) {
+
+                                //Llamar funcion que retorna plantas
+                                callback.onSuccess(null);
+
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+
+                            @Override
+                            public void noConnection() {
+
+                            }
+
+                            @Override
+                            public void timedOut() {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+
+                    @Override
+                    public void noConnection() {
+
+                    }
+
+                    @Override
+                    public void timedOut() {
+
+                    }
+                }
+        );
+    }
+
+    private void getPlantasDelUsuario(final VolleyCallBack callback){
+
+        God.getPlantasDeUsuario(getApplicationContext(), new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+                Log.d("XD",God.getLoggedUser().getNombre() + " tiene "+God.getLoggedUser().getPlantas().size());
+                callback.onSuccess(null);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
             }
         });
     }

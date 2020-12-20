@@ -1,5 +1,6 @@
 package com.example.siembrapp.data.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -8,9 +9,17 @@ import android.widget.Toast;
 import com.example.siembrapp.API.RequestHandler;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.R;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /*
@@ -18,17 +27,31 @@ Clase controlador
  */
 public class God {
 
-    public static final int OK = 0;
-    public static final int FAILURE = 1;
-    public static final int NOCONN = 2;
-    public static final int TIMEOUT = 3;
+
+    // Usuario loggeado
+    private static User loggedUser;
+
+    public static User getLoggedUser(){
+        return loggedUser;
+    }
+
+    public static void setLoggedUser(User newUser){
+        loggedUser = newUser;
+    }
+
+    public static void logout(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences("userinfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+    ////////////////////////////////////////////////////
 
     /**
-     * Buscar informacion del usuario, get de su ID y buscar sus plantas
-     * @param correo
-     * @param ctx
+     * 1.
+     * Hace la consulta, recibe el response y llama al metodo para escribir en SharedPreferences
      */
-    public static void setupUser(String correo, final Context ctx){
+    public static void setupUser(String correo, final Context ctx,final VolleyCallBack callBack){
         //Encapsulamos el correo en un jsonobject
         JSONObject params = new JSONObject();
         try {
@@ -39,7 +62,12 @@ public class God {
                 @Override
                 public void onSuccess(JSONObject object) {
                     //Pasar el resultado
-                    setLoggedUser(object,ctx);
+
+                    writeUserInfoToSharedPreferences(object,ctx);
+
+                    loadUser(ctx);
+
+                    callBack.onSuccess(null);
                 }
 
                 @Override
@@ -63,47 +91,54 @@ public class God {
     }
 
     /**
-     * Funcion que "settea" le usuario que inicio sesion
-     * @param object
+     * 2.
+     * Escribir la informacion del usuario en SharedPreferences
      */
-    public static void setLoggedUser(JSONObject object, Context ctx){
+    @SuppressLint("ApplySharedPref")
+    public static void writeUserInfoToSharedPreferences(JSONObject object, Context ctx){
+
         String jsonAsString = object.toString();
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences("userinfo",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences("userinfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("info",jsonAsString);
-        editor.apply();
+        Log.d("XD","Preferences saved: "+ editor.commit());
 
     }
 
     /**
-     * Retorna el objeto User con la informacion provista del JSONObject
-     * @param object
-     * @return
+     * 3.
+     * Leer de los datos de SharedPreferences para instanciar el objeto User
      */
-    public static User getUserInfo(JSONObject object){
-        String uid, nombre,correo,nombretipoOrganizacion,razon;
+    private static void loadUser(Context ctx) {
+
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences("userinfo", MODE_PRIVATE);
+        String infoAsJson = sharedPreferences.getString("info","{}");// Retornar el string del json, si no existe, retorna "{}" por default
+
         try {
+            //Tenemos el json de la info del usuario como string y la pasamos a JSONObject
+            JSONObject array = new JSONObject(infoAsJson);
 
-            uid = object.getString("uid");
-            nombre = object.getString("nombre");
-            correo = object.getString("correo");
-            nombretipoOrganizacion = object.getString("nombretipoorganizacion");
-            razon = object.getString("razon");
-
+            //Se crea el builder del usuario y extraemos cada dato
             User.UserBuilder userBuilder = new User.UserBuilder();
-            userBuilder.setUUID(uid).setNombre(nombre).setCorreo(correo).setTipoOrganizacion(nombretipoOrganizacion).setRazon(razon);
+            userBuilder
+                    .setNombre(array.getString("nombre"))
+                    .setCorreo(array.getString("correo"))
+                    .setRazon(array.getString("razon"))
+                    .setUUID(array.getString("uid"))
+                    .setTipoOrganizacion(array.getString("nombretipoorganizacion"));
 
-            return userBuilder.build();
+            //Lo asignamos al atributo loggedUser de la clase God
+            God.setLoggedUser(userBuilder.build());
 
         } catch (JSONException exception) {
             exception.printStackTrace();
-            return null;
         }
     }
 
-    public static void getPlantasDeUsuario(final Context ctx){
 
-        String uuid = Session.getLoggedUser().getUuid();
+    public static void getPlantasDeUsuario(final Context ctx, final VolleyCallBack callBack){
+        User user = God.getLoggedUser();
+        String uuid = user.getUuid();
 
         JSONObject params = new JSONObject();
         try {
@@ -111,13 +146,36 @@ public class God {
 
             RequestHandler.APIRequester.request(params, ctx, RequestHandler.GETUSERID, new VolleyCallBack() {
                 @Override
-                public void onSuccess(JSONObject object) {
+                public void onSuccess(JSONObject objectwithid) {
 
-                    try {
-                        Log.d("XD",object.getString("id"));
-                    } catch (JSONException exception) {
-                        exception.printStackTrace();
-                    }
+                    //Recibimos el id del usuario y lo pasamos directo al metodo para cargar las plantas
+                    //del usuario
+                    fetchUserPlantas(objectwithid,ctx, new VolleyCallBack() {
+                        @Override
+                        public void onSuccess(JSONObject object) {
+
+                            callBack.onSuccess(null);
+
+                        }
+
+                        @Override
+                        public void onFailure() {
+
+                        }
+
+                        @Override
+                        public void noConnection() {
+
+                        }
+
+                        @Override
+                        public void timedOut() {
+
+                        }
+                    });
+
+
+
                 }
 
                 @Override
@@ -139,19 +197,87 @@ public class God {
         } catch (JSONException exception) {
             exception.printStackTrace();
         }
-
     }
 
-    public static JSONObject buildResponse(int statuscode,String msg){
+    private static void fetchUserPlantas(JSONObject userid, Context ctx, final VolleyCallBack callBack) {
 
-        try {
-            return new JSONObject()
-                    .put("statuscode",statuscode)
-                    .put("msg",msg);
-        } catch (JSONException exception) {
-            exception.printStackTrace();
-            return null;
-        }
+        RequestHandler.APIRequester.request(userid, ctx, RequestHandler.GETUSERPLANTAS, new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject plantasDelUsuario) {
+
+                //Recibimos las plantas y pasamos el JSONArray a ArrayList<Plantas>)
+                try {
+                   JSONArray arrayPlantas = plantasDelUsuario.getJSONArray("plantas");
+
+                   ArrayList<Planta> plantas = new ArrayList<>();
+
+                   for(int i =0; i < arrayPlantas.length();i++){
+
+                       JSONObject element = arrayPlantas.getJSONObject(i);
+
+                       Planta.PlantaBuilder plantaBuilder = new Planta.PlantaBuilder();
+
+                       //Parse usos conocidos
+                       String usosConocidosStr = element.getString("usosconocidos");
+                       String[] usos = usosConocidosStr.split(", ");
+
+                       //Parse paisajes recomendados
+                       String paisajesRecomendadosStr = element.getString("paisajerecomendado");
+                       String[] paisajesRecomendados = paisajesRecomendadosStr.split(", ");
+
+                       plantaBuilder.setRequerimientosDeLuz(element.getString("requerimientosdeluz"))
+                               .setFamilia(element.getString("familia"))
+                               .setFenologia(element.getString("fenologia"))
+                               .setAgentePolinizador(element.getString("polinizador"))
+                               .setMetodoDispersion(element.getString("metododispersion"))
+                               .setNombreComun(element.getString("nombrecomun"))
+                               .setNombreCientifico(element.getString("nombrecientifico"))
+                               .setOrigen(element.getString("origen"))
+                               .setMinRangoAltitudinal(Double.parseDouble(element.getString("minrangoaltitudinal")))
+                               .setMaxRangoAltitudinal(Double.parseDouble(element.getString("maxrangoaltitudinal")))
+                               .setMetros(Double.parseDouble(element.getString("metros")))
+                               .setHabito(element.getString("requerimientosdeluz"))
+                               .setFruto(element.getString("frutos"))
+                               .setTexturaFruto(element.getString("texturafruto"))
+                               .setFlor(element.getString("flor"))
+                               .setPaisajeRecomendado(
+                                       new ArrayList<>(Arrays.asList(paisajesRecomendados))
+                               )
+                               .setUsosConocidos(
+                                       new ArrayList<>(Arrays.asList(usos))
+                               );
+
+                       plantas.add(plantaBuilder.build());
+                   }
+
+                   loadUserPlantas(plantas);
+                   callBack.onSuccess(null);
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
     }
 
+    /**
+     * Asigna las plantas al usuario
+     */
+    private static void loadUserPlantas(ArrayList<Planta> plantas){
+        God.getLoggedUser().setPlantas(plantas);
+    }
 }
