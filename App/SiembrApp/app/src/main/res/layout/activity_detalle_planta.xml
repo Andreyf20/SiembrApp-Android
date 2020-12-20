@@ -125,7 +125,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
                             <TextView
                                 android:id="@+id/origenLbl"
@@ -262,20 +263,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/rangoaltitudinalLbl"
-                                    android:textAlignment="center" />
+                                    android:textAlignment="viewStart" />
 
                                 <TextView
                                     android:id="@+id/rangoAltitudinalTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
-                                    android:textAlignment="center"
+                                    android:textAlignment="viewStart"
                                     android:textColor="@color/Black"
                                     android:textSize="18sp" />
                             </LinearLayout>
@@ -292,20 +294,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/requerimientosluzLbl"
-                                    android:textAlignment="center" />
+                                    android:textAlignment="viewStart" />
 
                                 <TextView
                                     android:id="@+id/requerimientosLuzTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
-                                    android:textAlignment="center"
+                                    android:textAlignment="viewStart"
                                     android:textColor="@color/Black"
                                     android:textSize="18sp" />
                             </LinearLayout>
@@ -315,26 +318,28 @@
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
                             android:layout_margin="3dp"
-                            app:cardCornerRadius="5dp">
+                            app:cardCornerRadius="5dp"
+                            >
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/fenologiaLlb"
-                                    android:textAlignment="center" />
+                                    android:textAlignment="viewStart" />
 
                                 <TextView
                                     android:id="@+id/fenologiaTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
-                                    android:textAlignment="center"
+                                    android:textAlignment="viewStart"
                                     android:textColor="@color/Black"
                                     android:textSize="18sp" />
 
@@ -351,20 +356,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/agentePolinizadorLbl"
-                                    android:textAlignment="center" />
+                                    android:textAlignment="viewStart" />
 
                                 <TextView
                                     android:id="@+id/agentePolinizadorTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
-                                    android:textAlignment="center"
+                                    android:textAlignment="viewStart"
                                     android:textColor="@color/Black"
                                     android:textSize="18sp" />
 
@@ -381,20 +387,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/metododispersionLbl"
-                                    android:textAlignment="center" />
+                                    android:textAlignment="viewStart" />
 
                                 <TextView
                                     android:id="@+id/metododispersionTV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Text"
-                                    android:textAlignment="center"
+                                    android:textAlignment="viewStart"
                                     android:textColor="@color/Black"
                                     android:textSize="18sp" />
                             </LinearLayout>

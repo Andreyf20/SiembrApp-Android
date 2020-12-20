@@ -72,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                             //Ya el usuario esta setteado, podemos pasar de actividad
                                             Intent mainActivityIntent = new Intent(getApplicationContext(),MainActivity.class);
+                                            Toast.makeText(getApplicationContext(), "Hola " +God.getLoggedUser().getNombre(), Toast.LENGTH_SHORT).show();
                                             startActivity(mainActivityIntent);
-
                                         }
 
                                         @Override

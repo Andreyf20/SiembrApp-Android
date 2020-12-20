@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Back button to toolbar
         Toolbar mainActivityToolbar = findViewById(R.id.mainactivitytoolbar);
+        mainActivityToolbar.setTitle("");
         setSupportActionBar(mainActivityToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -39,7 +40,5 @@ public class MainActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        Toast.makeText(getApplicationContext(), "Hola " +God.getLoggedUser().getNombre(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/launcher_ic_siembrapp_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:screenOrientation="sensorPortrait">
 
         <activity android:name=".ui.detallesPlanta.DetallePlantaActivity"/>
         <activity
