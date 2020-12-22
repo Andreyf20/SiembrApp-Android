@@ -280,4 +280,34 @@ public class God {
     private static void loadUserPlantas(ArrayList<Planta> plantas){
         God.getLoggedUser().setPlantas(plantas);
     }
+
+    /**
+     * Pedirle al API la lista de viveros
+     */
+    public static void listarViveros(final Context ctx,final VolleyCallBack callBack){
+
+        RequestHandler.APIRequester.request(null, ctx, RequestHandler.LISTVIVEROS, new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
+
+    }
+
 }

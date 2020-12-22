@@ -5,7 +5,7 @@
     <string name="prompt_password">Contraseña</string>
     <string name="prompt_password_verification">Verificar contraseña</string>
     <string name="action_sign_in">Iniciar sesión</string>
-    <string name="action_sign_in_short">Ingresar</string>
+    <string name="action_sign_in_short">Iniciar sesión</string>
     <string name="register">Registrarse</string>
     <string name="registerHeading">Registro</string>
     <string name="welcome">"Welcome !"</string>

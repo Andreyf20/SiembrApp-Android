@@ -1,4 +1,4 @@
-package com.example.siembrapp.ui.dashboard;
+package com.example.siembrapp.ui.quesembrar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.siembrapp.R;
 
-public class DashboardFragment extends Fragment {
+public class QueSembrarFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
 
@@ -22,14 +22,7 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        View root = inflater.inflate(R.layout.fragment_quesembrar, container, false);
         return root;
     }
 }

@@ -1,11 +1,5 @@
 package com.example.siembrapp.data.model;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.widget.LinearLayout;
-
-import androidx.cardview.widget.CardView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

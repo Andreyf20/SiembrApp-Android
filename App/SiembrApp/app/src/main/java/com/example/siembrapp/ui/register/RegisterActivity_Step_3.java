@@ -1,8 +1,7 @@
-package com.example.siembrapp.register;
+package com.example.siembrapp.ui.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;

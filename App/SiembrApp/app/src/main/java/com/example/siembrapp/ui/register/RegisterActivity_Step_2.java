@@ -1,4 +1,4 @@
-package com.example.siembrapp.register;
+package com.example.siembrapp.ui.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 

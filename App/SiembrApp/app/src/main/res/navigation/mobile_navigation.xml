@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_quesembrar"
-        android:name="com.example.siembrapp.ui.dashboard.DashboardFragment"
+        android:name="com.example.siembrapp.ui.quesembrar.QueSembrarFragment"
         android:label="@string/quesembrar"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_quesembrar" />
 
     <fragment
         android:id="@+id/navigation_viveros"
-        android:name="com.example.siembrapp.ui.notifications.NotificationsFragment"
+        android:name="com.example.siembrapp.ui.viveros.ViverosFragment"
         android:label="@string/viveros"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_viveros" />
 </navigation>

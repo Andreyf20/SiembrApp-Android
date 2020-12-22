@@ -57,6 +57,8 @@ public class RequestHandler {
     public static final int GETUSERINFO = 2;
     public static final int GETUSERID = 3;
     public static final int GETUSERPLANTAS = 4;
+    public static final int LISTVIVEROS = 5;
+
 
     //JSONObject, MODE.LOGIN
     public static class APIRequester{
@@ -86,9 +88,48 @@ public class RequestHandler {
                     getPlantas(object,ctx,callback);
                     break;
 
+                case LISTVIVEROS:
+
+                    getViverosList(object,ctx,callback);
+                    break;
+
                 default:
 
             }
+        }
+
+        private static void getViverosList(JSONObject object, Context ctx,final VolleyCallBack callback) {
+            //Request URL
+            String url = APIURL + "listViveros";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    callback.onSuccess(response);
+
+                }
+            };
+
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,url,null,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
         }
 
         private static void getPlantas(JSONObject bodyParams, Context ctx,final VolleyCallBack callback) {

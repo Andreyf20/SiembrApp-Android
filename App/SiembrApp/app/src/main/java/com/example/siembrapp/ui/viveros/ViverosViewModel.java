@@ -1,14 +1,14 @@
-package com.example.siembrapp.ui.notifications;
+package com.example.siembrapp.ui.viveros;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class ViverosViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public ViverosViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
     }
