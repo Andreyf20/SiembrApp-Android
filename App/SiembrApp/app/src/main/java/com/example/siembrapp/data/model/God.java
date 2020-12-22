@@ -27,6 +27,8 @@ Clase controlador
  */
 public class God {
 
+    //Log TAG
+    static final String TAG = "God";
 
     // Usuario loggeado
     private static User loggedUser;
@@ -135,7 +137,9 @@ public class God {
         }
     }
 
-
+    /**
+     * Primer paso para hacer fetch de las plantas del usuario usando su UUID
+     */
     public static void getPlantasDeUsuario(final Context ctx, final VolleyCallBack callBack){
         User user = God.getLoggedUser();
         String uuid = user.getUuid();
@@ -148,7 +152,7 @@ public class God {
                 @Override
                 public void onSuccess(JSONObject objectwithid) {
 
-                    //Recibimos el id del usuario y lo pasamos directo al metodo para cargar las plantas
+                    //Utilizando el UUID recibimos el id del usuario y lo pasamos directo al metodo para cargar las plantas
                     //del usuario
                     fetchUserPlantas(objectwithid,ctx, new VolleyCallBack() {
                         @Override
@@ -174,8 +178,6 @@ public class God {
                         }
                     });
 
-
-
                 }
 
                 @Override
@@ -199,6 +201,9 @@ public class God {
         }
     }
 
+    /**
+     *  Consultar plantas del usuario usando su id
+     */
     private static void fetchUserPlantas(JSONObject userid, Context ctx, final VolleyCallBack callBack) {
 
         RequestHandler.APIRequester.request(userid, ctx, RequestHandler.GETUSERPLANTAS, new VolleyCallBack() {
@@ -284,7 +289,7 @@ public class God {
     /**
      * Pedirle al API la lista de viveros
      */
-    public static void listarViveros(final Context ctx,final VolleyCallBack callBack){
+    public static void listarViveros(final Context ctx, final VolleyCallBack callBack){
 
         RequestHandler.APIRequester.request(null, ctx, RequestHandler.LISTVIVEROS, new VolleyCallBack() {
             @Override
@@ -308,6 +313,80 @@ public class God {
             }
         });
 
+    }
+
+    /**
+     * Conseguir los numeros de telefono del vivero usando su nombre
+     */
+    public static void getTelefonos(final Context ctx, final String nombre, final VolleyCallBack callBack){
+
+        //Encapsular el nombre en JSONObject
+        JSONObject nombreVivero = new JSONObject();
+        try {
+            nombreVivero.put("nombreVivero",nombre);
+        } catch (JSONException exception) {
+            exception.printStackTrace();
+        }
+
+        RequestHandler.APIRequester.request(nombreVivero, ctx, RequestHandler.GETTELEFONOSVIVERO, new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.d(TAG,response.toString());
+                callBack.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
+    }
+
+    /**
+     * Conseguir los horarios del vivero usando su nombre
+     */
+    public static void getHorarios(final Context ctx, final String nombre, final VolleyCallBack callBack){
+        JSONObject nombreVivero = new JSONObject();
+        try {
+            nombreVivero.put("nombreVivero",nombre);
+        } catch (JSONException exception) {
+            exception.printStackTrace();
+        }
+
+        RequestHandler.APIRequester.request(nombreVivero, ctx, RequestHandler.GETHORARIOSVIVERO, new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject response) {
+
+                Log.d(TAG,response.toString());
+                callBack.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
     }
 
 }

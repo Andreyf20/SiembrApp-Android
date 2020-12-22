@@ -1,16 +1,28 @@
 package com.example.siembrapp.data.model;
 
+import android.util.Pair;
+
+import java.util.ArrayList;
+
 public class Vivero {
 
-    String nombre,direccion,telefono,horaInicio,horaFin,dias;
+    String nombre,direccion;
+    ArrayList<String> telefonos;
+    ArrayList<Pair<String,String>> horarios;
 
     public Vivero(ViveroBuilder builder){
         this.nombre = builder.nombre;
         this.direccion = builder.direccion;
-        this.telefono = builder.telefono;
-        this.horaInicio = builder.horaInicio;
-        this.horaFin = builder.horaFin;
-        this.dias = builder.dias;
+        this.telefonos = builder.telefonos;
+        this.horarios = builder.horarios;
+    }
+
+    public ArrayList<String> getTelefonos() {
+        return telefonos;
+    }
+
+    public ArrayList<Pair<String, String>> getHorarios() {
+        return horarios;
     }
 
     public String getNombre() {
@@ -21,25 +33,12 @@ public class Vivero {
         return direccion;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getHoraInicio() {
-        return horaInicio;
-    }
-
-    public String getHoraFin() {
-        return horaFin;
-    }
-
-    public String getDias() {
-        return dias;
-    }
-
     public static class ViveroBuilder{
 
-        String nombre,direccion,telefono,horaInicio,horaFin,dias;
+        String nombre,direccion;
+
+        ArrayList<String> telefonos;
+        ArrayList<Pair<String,String>> horarios;
 
         public ViveroBuilder setNombre(String nombre) {
             this.nombre = nombre;
@@ -51,24 +50,18 @@ public class Vivero {
             return this;
         }
 
-        public ViveroBuilder setTelefono(String telefono) {
-            this.telefono = telefono;
+        public ViveroBuilder setTelefonos(ArrayList<String> telefonos) {
+            this.telefonos = telefonos;
             return this;
         }
 
-        public ViveroBuilder setHoraInicio(String horaInicio) {
-            this.horaInicio = horaInicio;
+        public ViveroBuilder setHorarios(ArrayList<Pair<String, String>> horarios) {
+            this.horarios = horarios;
             return this;
         }
 
-        public ViveroBuilder setHoraFin(String horaFin) {
-            this.horaFin = horaFin;
-            return this;
-        }
-
-        public ViveroBuilder setDias(String dias) {
-            this.dias = dias;
-            return this;
+        public Vivero build(){
+            return new Vivero(this);
         }
     }
 }

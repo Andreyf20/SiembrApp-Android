@@ -5,12 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.siembrapp.Interfaces.VolleyCallBack;
@@ -29,12 +26,10 @@ public class ViverosFragment extends Fragment {
                 new ViewModelProvider(this).get(ViverosViewModel.class);
         View root = inflater.inflate(R.layout.fragment_viveros, container, false);
 
-        God.listarViveros(container.getContext(), new VolleyCallBack() {
+        God.getHorarios(getContext(), "FUNDAZOO", new VolleyCallBack() {
             @Override
             public void onSuccess(JSONObject object) {
-
                 Log.d("XD",object.toString());
-
             }
 
             @Override
@@ -52,6 +47,52 @@ public class ViverosFragment extends Fragment {
 
             }
         });
+
+        /*God.getTelefonos(container.getContext(),"FUNDAZOO", new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+                Log.d("XD",object.toString());
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });*/
+
+        /*God.listarViveros(container.getContext(), new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+
+                //Log.d("XD",object.toString());
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });*/
 
         return root;
     }

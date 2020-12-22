@@ -2,6 +2,7 @@ package com.example.siembrapp.API;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -58,6 +59,8 @@ public class RequestHandler {
     public static final int GETUSERID = 3;
     public static final int GETUSERPLANTAS = 4;
     public static final int LISTVIVEROS = 5;
+    public static final int GETTELEFONOSVIVERO = 6;
+    public static final int GETHORARIOSVIVERO = 7;
 
 
     //JSONObject, MODE.LOGIN
@@ -65,40 +68,116 @@ public class RequestHandler {
 
         private static final String APIURL = "http://192.168.50.37:5000/api/";
 
-        public static void request(JSONObject object,Context ctx,int mode, VolleyCallBack callback){
+        public static void request(JSONObject params,Context ctx,int mode, VolleyCallBack callback){
 
             switch(mode){
 
                 case LOGIN:
 
-                    login(object,ctx,callback);
+                    login(params,ctx,callback);
                     break;
 
                 case GETUSERINFO:
 
-                    getUserInfo(object,ctx,callback);
+                    getUserInfo(params,ctx,callback);
                     break;
 
                 case GETUSERID:
 
-                    getUserID(object,ctx,callback);
+                    getUserID(params,ctx,callback);
                     break;
                 case GETUSERPLANTAS:
 
-                    getPlantas(object,ctx,callback);
+                    getPlantas(params,ctx,callback);
                     break;
 
                 case LISTVIVEROS:
 
-                    getViverosList(object,ctx,callback);
+                    getViverosList(ctx,callback);
+                    break;
+
+                case GETTELEFONOSVIVERO:
+
+                    getTelefonosDeVivero(params,ctx,callback);
+                    break;
+
+                case GETHORARIOSVIVERO:
+
+                    getHorariosDeVivero(params,ctx,callback);
                     break;
 
                 default:
 
+                    Toast.makeText(ctx, "No existe esa funcion", Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
 
-        private static void getViverosList(JSONObject object, Context ctx,final VolleyCallBack callback) {
+        private static void getTelefonosDeVivero(JSONObject bodyparams, Context ctx,final VolleyCallBack callback) {
+            //Request URL
+            String url= APIURL + "getTelefonosVivero";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    callback.onSuccess(response);
+                }
+            };
+
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyparams,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
+        }
+
+        private static void getHorariosDeVivero(JSONObject bodyparams, Context ctx,final VolleyCallBack callback) {
+            //Request URL
+            String url= APIURL + "getHorariosVivero";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    callback.onSuccess(response);
+                }
+            };
+
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyparams,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
+        }
+
+        private static void getViverosList(Context ctx,final VolleyCallBack callback) {
             //Request URL
             String url = APIURL + "listViveros";
 
