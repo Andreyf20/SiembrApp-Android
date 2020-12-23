@@ -1,7 +1,6 @@
 package com.example.siembrapp.API;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -13,7 +12,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -185,9 +183,7 @@ public class RequestHandler {
             Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
                     callback.onSuccess(response);
-
                 }
             };
 

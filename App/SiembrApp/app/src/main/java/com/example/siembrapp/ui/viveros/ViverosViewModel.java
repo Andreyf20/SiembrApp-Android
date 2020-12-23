@@ -1,19 +1,24 @@
 package com.example.siembrapp.ui.viveros;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.siembrapp.data.model.God;
+import com.example.siembrapp.data.model.Vivero;
+
+import java.util.ArrayList;
 
 public class ViverosViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private ArrayList<Vivero> viveros;
 
     public ViverosViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public ArrayList<Vivero> getViveros() {
+        return viveros;
+    }
+
+    public void updateViveros(){
+        viveros = God.getViveros();
     }
 }

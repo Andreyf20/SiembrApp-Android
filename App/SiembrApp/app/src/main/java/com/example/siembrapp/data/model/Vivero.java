@@ -35,10 +35,10 @@ public class Vivero {
 
     public static class ViveroBuilder{
 
-        String nombre,direccion;
+        private String nombre,direccion;
 
-        ArrayList<String> telefonos;
-        ArrayList<Pair<String,String>> horarios;
+        private ArrayList<String> telefonos;
+        private ArrayList<Pair<String,String>> horarios;
 
         public ViveroBuilder setNombre(String nombre) {
             this.nombre = nombre;

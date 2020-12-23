@@ -9,8 +9,6 @@ import android.widget.Toast;
 import com.example.siembrapp.API.RequestHandler;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.R;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +44,22 @@ public class God {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
+    }
+    ////////////////////////////////////////////////////
+
+    //Viveros
+    private static ArrayList<Vivero> viveros;
+
+    public static ArrayList<Vivero> getViveros(){
+        return viveros;
+    }
+
+    public static void setViveros(ArrayList<Vivero> viverosList){
+        viveros = viverosList;
+    }
+
+    public static void updateViveros(){
+        //TODO call getViveros request
     }
     ////////////////////////////////////////////////////
 
@@ -257,6 +271,7 @@ public class God {
 
                    loadUserPlantas(plantas);
                    callBack.onSuccess(null);
+
                 } catch (JSONException exception) {
                     exception.printStackTrace();
                 }
@@ -289,12 +304,15 @@ public class God {
     /**
      * Pedirle al API la lista de viveros
      */
-    public static void listarViveros(final Context ctx, final VolleyCallBack callBack){
+    public static void getListaViveros(final Context ctx,final VolleyCallBack callBack){
 
         RequestHandler.APIRequester.request(null, ctx, RequestHandler.LISTVIVEROS, new VolleyCallBack() {
             @Override
             public void onSuccess(JSONObject object) {
-                callBack.onSuccess(object);
+                if(viveros == null){
+                    loadViveros(object);
+                }
+                callBack.onSuccess(null);
             }
 
             @Override
@@ -313,6 +331,33 @@ public class God {
             }
         });
 
+    }
+
+    /**
+     * Tomar el JSON array, parsearlo y asignarlo al ArrayList<String> viveros
+     */
+    private static void loadViveros(JSONObject viverosJSON){
+
+        try {
+            JSONArray viverosJSONArray = viverosJSON.getJSONArray("viveros");
+
+            ArrayList<Vivero> viveros = new ArrayList<>();
+
+            for (int i = 0; i < viverosJSONArray.length(); i++) {
+
+                JSONObject viveroObject = viverosJSONArray.getJSONObject(i);
+
+                Vivero.ViveroBuilder builder = new Vivero.ViveroBuilder();
+                builder.setNombre(viveroObject.getString("nombre"))
+                        .setDireccion(viveroObject.getString("direccion"));
+
+                viveros.add(builder.build());
+            }
+            God.setViveros(viveros);
+
+        } catch (JSONException exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
@@ -388,5 +433,4 @@ public class God {
             }
         });
     }
-
 }

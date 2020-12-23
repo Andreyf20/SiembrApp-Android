@@ -1,7 +1,6 @@
 package com.example.siembrapp.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,66 +12,72 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siembrapp.R;
-import com.example.siembrapp.data.model.Planta;
-import com.example.siembrapp.ui.detallesPlanta.DetallePlantaActivity;
+import com.example.siembrapp.data.model.Vivero;
 
 import java.util.List;
 
-public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.ViewHolder>{
+public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.ViewHolder>{
 
-    private List<Planta> plantas;
+    private List<Vivero> viveros;
 
-    public PlantasCardAdapter(List<Planta> plantas){
-        this.plantas = plantas;
+    public ViverosCardAdapter(List<Vivero> viveros) {
+        this.viveros = viveros;
+    }
+
+    public void setViveros(List<Vivero> nuevoVivero){
+        viveros = nuevoVivero;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView text;
         public ImageView img;
+        public TextView nombreViveroTV, direccionViveroTV;
         public CardView card;
 
         public ViewHolder(View itemView){
             super(itemView);
 
-            text = itemView.findViewById(R.id.infoTV);
-            img = itemView.findViewById(R.id.fotoIV);
-            card = itemView.findViewById(R.id.plantaCard);
+            img = itemView.findViewById(R.id.fotoViveroIV);
+            nombreViveroTV = itemView.findViewById(R.id.nombreViveroTV);
+            direccionViveroTV = itemView.findViewById(R.id.direccionViveroTV);
+            card = itemView.findViewById(R.id.viveroCard);
         }
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View plantasView = inflater.inflate(R.layout.planta_info_basica_item, parent, false);
+        View viveroView = inflater.inflate(R.layout.vivero_info_basica_item, parent, false);
 
         // Return a new holder instance
-        return new ViewHolder(plantasView);
+        return new ViewHolder(viveroView);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final Planta planta = plantas.get(position);
+        final Vivero vivero = viveros.get(position);
 
-        TextView text = holder.text;
-        text.setText(planta.getInfoBasica());
+        TextView nombreViveroTV = holder.nombreViveroTV;
+        nombreViveroTV.setText(vivero.getNombre());
 
-        // Foto de icono eucalyptus temporalmente
+        TextView direccionViveroTV = holder.direccionViveroTV;
+        direccionViveroTV.setText(vivero.getDireccion());
+
+        // Foto de icono vivero temporalmente
         ImageView img = holder.img;
-        img.setImageResource(R.drawable.ic_eucalyptus);
+        img.setImageResource(R.drawable.ic_nursery_garden);
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent detallePlantaIntent = new Intent(v.getContext(), DetallePlantaActivity.class);
-                detallePlantaIntent.putExtra("planta", planta);
-                v.getContext().startActivity(detallePlantaIntent);
             }
         });
 
@@ -80,7 +85,6 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
 
     @Override
     public int getItemCount() {
-        return plantas.size();
+        return viveros.size();
     }
-
 }
