@@ -20,6 +20,10 @@ public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.
 
     private List<Vivero> viveros;
 
+    public ViverosCardAdapter() {
+
+    }
+
     public ViverosCardAdapter(List<Vivero> viveros) {
         this.viveros = viveros;
     }
@@ -80,7 +84,6 @@ public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.
 
             }
         });
-
     }
 
     @Override

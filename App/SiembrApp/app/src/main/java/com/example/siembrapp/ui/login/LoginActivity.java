@@ -79,33 +79,11 @@ public class LoginActivity extends AppCompatActivity {
                                         public void onSuccess(JSONObject object) {
 
                                             pDialog.hide();
+
                                             //Ya el usuario esta setteado, podemos pasar de actividad
-
-                                            God.getListaViveros(getApplicationContext(), new VolleyCallBack() {
-                                                @Override
-                                                public void onSuccess(JSONObject object) {
-
-                                                    Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                                    Toast.makeText(getApplicationContext(), "Hola " +God.getLoggedUser().getNombre(), Toast.LENGTH_SHORT).show();
-                                                    startActivity(mainActivityIntent);
-
-                                                }
-
-                                                @Override
-                                                public void onFailure() {
-
-                                                }
-
-                                                @Override
-                                                public void noConnection() {
-
-                                                }
-
-                                                @Override
-                                                public void timedOut() {
-
-                                                }
-                                            });
+                                            Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                            Toast.makeText(getApplicationContext(), "Hola " +God.getLoggedUser().getNombre(), Toast.LENGTH_SHORT).show();
+                                            startActivity(mainActivityIntent);
                                         }
 
                                         @Override

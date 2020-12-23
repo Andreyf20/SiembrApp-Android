@@ -11,21 +11,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siembrapp.Adapters.ViverosCardAdapter;
+import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.R;
 import com.example.siembrapp.data.model.God;
-import com.example.siembrapp.data.model.Vivero;
-import com.example.siembrapp.data.model.Vivero.ViveroBuilder;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
 
 public class ViverosFragment extends Fragment {
 
 
     //Ref: https://gist.github.com/takeshiyako2/ac4b901ec26658058603 MainActivity.java
     //Ref: https://stackoverflow.com/a/31368367
+
+    private RecyclerView viverosRV;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
 
         final View root = inflater.inflate(R.layout.fragment_viveros, container, false);
 
@@ -40,16 +40,43 @@ public class ViverosFragment extends Fragment {
         ViveroBuilder builder2 = new ViveroBuilder();
         builder2.setNombre("B").setDireccion("Coronado");
         viveros.add(builder2.build());*/
+        setupViveros();
 
-        ViverosCardAdapter adapter = new ViverosCardAdapter(God.getViveros());
-        RecyclerView viverosRV = root.findViewById(R.id.viverosRV);
+        viverosRV = root.findViewById(R.id.viverosRV);
 
         viverosRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        viverosRV.setAdapter(adapter);
+
 
         return root;
     }
 
+    private void setupViveros(){
+        God.getListaViveros(getContext(), new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+                ViverosCardAdapter adapter = new ViverosCardAdapter();
+                adapter.setViveros(God.getViveros());
+                adapter.notifyDataSetChanged();
+
+                viverosRV.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
+    }
 
     /*God.getHorarios(getContext(), "FUNDAZOO", new VolleyCallBack() {
             @Override
