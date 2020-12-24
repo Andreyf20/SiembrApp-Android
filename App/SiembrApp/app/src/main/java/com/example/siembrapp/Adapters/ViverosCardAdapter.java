@@ -1,6 +1,10 @@
 package com.example.siembrapp.Adapters;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +15,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.R;
+import com.example.siembrapp.data.model.God;
 import com.example.siembrapp.data.model.Vivero;
+import com.example.siembrapp.ui.viveros.DetallesViveroActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.ViewHolder>{
@@ -80,10 +92,199 @@ public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
+
+                Dialog dialog = new Dialog(v.getContext());
+                final ProgressDialog pDialog = new ProgressDialog(dialog.getContext());
+                pDialog.setMessage("Cargando vivero...");
+                pDialog.show();
+
+                getInfoVivero(v,vivero, new VolleyCallBack() {
+                    @Override
+                    public void onSuccess(JSONObject object) {
+                        pDialog.hide();
+                        //Intent
+                        Intent detallesViveroIntent = new Intent(v.getContext(), DetallesViveroActivity.class);
+
+                        //Clase Pair<> no es serializable por lo que tenemos que pasar los datos uno por uno
+                        detallesViveroIntent.putExtra("nombre",vivero.getNombre());
+                        detallesViveroIntent.putExtra("direccion",vivero.getDireccion());
+                        detallesViveroIntent.putExtra("telefonos",vivero.getTelefonosStr());
+                        detallesViveroIntent.putExtra("horarios",vivero.getHorariosStr());
+
+                        v.getContext().startActivity(detallesViveroIntent);
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        pDialog.hide();
+                    }
+
+                    @Override
+                    public void noConnection() {
+                        pDialog.hide();
+                    }
+
+                    @Override
+                    public void timedOut() {
+                        pDialog.hide();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * Fetch y asignar los horarios y telefonos del vivero
+     */
+    private void getInfoVivero(final View v,final Vivero vivero,final VolleyCallBack callback){
+
+        loadViveroTelefonos(v,vivero, new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+
+                loadViveroHorarios(v,vivero, new VolleyCallBack() {
+                    @Override
+                    public void onSuccess(JSONObject object) {
+
+                        callback.onSuccess(null);
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+
+                    @Override
+                    public void noConnection() {
+
+                    }
+
+                    @Override
+                    public void timedOut() {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
 
             }
         });
+
+    }
+
+    /**
+     * Hace set de los horarios del vivero especificado
+     */
+    private void loadViveroHorarios(View v,final Vivero vivero, final VolleyCallBack callback){
+
+        God.getHorarios(v.getContext(), vivero.getNombre(), new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+
+                try {
+                    ArrayList<Pair<String,String>> horarios = new ArrayList<>();
+
+                    JSONArray array = object.getJSONArray("horarios");
+
+                    for (int i = 0; i < array.length(); i++){
+
+                        JSONObject objeto = array.getJSONObject(i);
+                        String horas,dias;
+
+                        //Armamos el pair que tiene formato 8:00 - 15:30
+                        horas = objeto.getString("horainicio") + " - " + objeto.getString("horafin");
+
+                        dias = objeto.getString("dias");
+
+                        Pair<String,String> pair = new Pair<>(horas,dias);
+
+                        horarios.add(pair);
+                    }
+
+                    vivero.setHorarios(horarios);
+                    callback.onSuccess(null);
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
+    }
+
+    /**
+     * Hace set de los telefonos del vivero especificado
+     */
+    private void loadViveroTelefonos(View v,final Vivero vivero, final VolleyCallBack callBack) {
+
+        God.getTelefonos(v.getContext(), vivero.getNombre(), new VolleyCallBack() {
+            @Override
+            public void onSuccess(JSONObject object) {
+
+                try {
+                    ArrayList<String> telefonos = new ArrayList<>();
+
+                    JSONArray array = object.getJSONArray("telefonos");
+
+                    for (int i = 0; i < array.length(); i++){
+
+                        JSONObject objeto = array.getJSONObject(i);
+
+                        telefonos.add(objeto.getString("telefono"));
+                    }
+                    vivero.setTelefonos(telefonos);
+                    callBack.onSuccess(null);
+
+                } catch (JSONException exception) {
+                    exception.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void noConnection() {
+
+            }
+
+            @Override
+            public void timedOut() {
+
+            }
+        });
+
     }
 
     @Override

@@ -47,4 +47,8 @@
     <string name="errorAlParsear">Error de parse</string>
     <string name="Success">SUCCESS</string>
     <string name="loading">Cargando...</string>
+    <string name="direccionLbl">Dirección</string>
+    <string name="telefonoLbl">Teléfonos</string>
+    <string name="horarioLbl">Horario</string>
+
 </resources>
