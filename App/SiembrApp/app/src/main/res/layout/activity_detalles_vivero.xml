@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="60dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/scrollView2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +30,8 @@
             <ImageButton
                 android:id="@+id/detallesViveroBackBtn"
                 android:layout_width="60dp"
+                android:background="@color/colorPrimary"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark"
                 android:src="@drawable/ic_back_arrow" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:padding="5dp"
+                android:padding="3dp"
                 android:text="Nombre vivero"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
