@@ -50,5 +50,6 @@
     <string name="direccionLbl">Dirección</string>
     <string name="telefonoLbl">Teléfonos</string>
     <string name="horarioLbl">Horario</string>
+    <string name="habilitar_permisos">Habilitar Permisos</string>
 
 </resources>
