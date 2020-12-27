@@ -161,6 +161,8 @@ public class LoginActivity extends AppCompatActivity {
         String status = getConnectivityStatusString();
         if(status.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Se necesita internet para utilizar la aplicación", Toast.LENGTH_LONG).show();
+            loginButton.setEnabled(false);
+            registerEditText.setEnabled(false);
         }
     }
 
