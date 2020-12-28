@@ -1,23 +1,18 @@
 package com.example.siembrapp.ui.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.siembrapp.API.RequestHandler;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
-import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
-import com.example.siembrapp.data.model.God;
-import com.example.siembrapp.ui.login.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,6 +91,7 @@ public class RegisterActivity_Step_3 extends AppCompatActivity {
             params.put("contrasenna", password);
             params.put("tipoOrganizacion", tipoorganizacion);
             params.put("razon", razon);
+            params.put("admin",false);
 
             Dialog dialog = new Dialog(RegisterActivity_Step_3.this);
             final ProgressDialog pDialog = new ProgressDialog(dialog.getContext());
@@ -110,9 +106,9 @@ public class RegisterActivity_Step_3 extends AppCompatActivity {
                         //Consumimos el objeto json del RequestResponse
                         String response = object.getString("ok");
                         if(response.equals("1")){
-                            Toast.makeText(getApplicationContext(), "Cuenta creada con éxito!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Cuenta creada con éxito!", Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(getApplicationContext(), "Error: No se pudo crear la cuenta, revisar si ya se está registrado!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error: No se pudo crear la cuenta, revisar si ya se está registrado!", Toast.LENGTH_SHORT).show();
                         }
                         pDialog.hide();
                         finish();
