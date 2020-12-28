@@ -27,7 +27,7 @@ public class RequestHandler {
 
         private static RequestQueueSingleton instance;
         private RequestQueue requestQueue;
-        private static Context ctx;
+        private final Context ctx;
 
         private RequestQueueSingleton(Context context){
             ctx = context;
@@ -57,15 +57,11 @@ public class RequestHandler {
     public static final int GETUSERID = 3;
     public static final int GETUSERPLANTAS = 4;
     public static final int LISTVIVEROS = 5;
-    public static final int GETTELEFONOSVIVERO = 6;
-    public static final int GETHORARIOSVIVERO = 7;
-    public static final int REGISTERUSER = 8;
-
-
-    //JSONObject, MODE.LOGIN
+    public static final int REGISTERUSER = 6;
+    
     public static class APIRequester{
 
-        private static final String APIURL = "http://192.168.0.3:5000/api/";
+        private static final String APIURL = "http://192.168.50.37:5000/api/";
 
         public static void request(JSONObject params,Context ctx,int mode, VolleyCallBack callback){
 
@@ -95,16 +91,6 @@ public class RequestHandler {
                     getViverosList(ctx,callback);
                     break;
 
-                case GETTELEFONOSVIVERO:
-
-                    getTelefonosDeVivero(params,ctx,callback);
-                    break;
-
-                case GETHORARIOSVIVERO:
-
-                    getHorariosDeVivero(params,ctx,callback);
-                    break;
-
                 case REGISTERUSER:
 
                     registerUser(params, ctx, callback);
@@ -115,70 +101,6 @@ public class RequestHandler {
                     Toast.makeText(ctx, "No existe esa funcion", Toast.LENGTH_SHORT).show();
                     break;
             }
-        }
-
-        private static void getTelefonosDeVivero(JSONObject bodyparams, Context ctx,final VolleyCallBack callback) {
-            //Request URL
-            String url= APIURL + "getTelefonosVivero";
-
-            //Instanciar Listener para el JsonObjectRequest
-            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    callback.onSuccess(response);
-                }
-            };
-
-            //Instanciar error listener
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    if (error.getClass().equals(NoConnectionError.class)) {
-                        callback.noConnection();
-                        return;
-                    }
-                    if (error.getClass().equals(TimeoutError.class)) {
-                        callback.timedOut();
-                        return;
-                    }
-                    callback.onFailure();
-                }
-            };
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyparams,responseListener,errorListener);
-            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
-        }
-
-        private static void getHorariosDeVivero(JSONObject bodyparams, Context ctx,final VolleyCallBack callback) {
-            //Request URL
-            String url= APIURL + "getHorariosVivero";
-
-            //Instanciar Listener para el JsonObjectRequest
-            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    callback.onSuccess(response);
-                }
-            };
-
-            //Instanciar error listener
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    if (error.getClass().equals(NoConnectionError.class)) {
-                        callback.noConnection();
-                        return;
-                    }
-                    if (error.getClass().equals(TimeoutError.class)) {
-                        callback.timedOut();
-                        return;
-                    }
-                    callback.onFailure();
-                }
-            };
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyparams,responseListener,errorListener);
-            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
         }
 
         private static void getViverosList(Context ctx,final VolleyCallBack callback) {

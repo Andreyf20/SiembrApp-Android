@@ -40,12 +40,12 @@ public class ViverosFragment extends Fragment {
         ViveroBuilder builder2 = new ViveroBuilder();
         builder2.setNombre("B").setDireccion("Coronado");
         viveros.add(builder2.build());*/
+
         setupViveros();
 
         viverosRV = root.findViewById(R.id.viverosRV);
 
         viverosRV.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         return root;
     }
@@ -78,47 +78,4 @@ public class ViverosFragment extends Fragment {
         });
     }
 
-    /*God.getHorarios(getContext(), "FUNDAZOO", new VolleyCallBack() {
-            @Override
-            public void onSuccess(JSONObject object) {
-                Log.d("XD",object.toString());
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-
-            @Override
-            public void noConnection() {
-
-            }
-
-            @Override
-            public void timedOut() {
-
-            }
-        });*/
-
-    /*God.getTelefonos(container.getContext(),"FUNDAZOO", new VolleyCallBack() {
-            @Override
-            public void onSuccess(JSONObject object) {
-                Log.d("XD",object.toString());
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-
-            @Override
-            public void noConnection() {
-
-            }
-
-            @Override
-            public void timedOut() {
-
-            }
-        });*/
 }

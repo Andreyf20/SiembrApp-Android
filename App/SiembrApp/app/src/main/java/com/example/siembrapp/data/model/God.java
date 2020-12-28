@@ -45,6 +45,7 @@ public class God {
         editor.clear();
         editor.apply();
     }
+
     ////////////////////////////////////////////////////
 
     //Viveros
@@ -61,6 +62,7 @@ public class God {
     public static void updateViveros(){
         //TODO call getViveros request
     }
+
     ////////////////////////////////////////////////////
 
     /**
@@ -349,7 +351,9 @@ public class God {
 
                 Vivero.ViveroBuilder builder = new Vivero.ViveroBuilder();
                 builder.setNombre(viveroObject.getString("nombre"))
-                        .setDireccion(viveroObject.getString("direccion"));
+                        .setDireccion(viveroObject.getString("direccion"))
+                        .setTelefonos(viveroObject.getString("telefonos"))
+                        .setHorarios(viveroObject.getString("horarios"));
 
                 viveros.add(builder.build());
             }
@@ -360,78 +364,4 @@ public class God {
         }
     }
 
-    /**
-     * Conseguir los numeros de telefono del vivero usando su nombre
-     */
-    public static void getTelefonos(final Context ctx, final String nombre, final VolleyCallBack callBack){
-
-        //Encapsular el nombre en JSONObject
-        JSONObject nombreVivero = new JSONObject();
-        try {
-            nombreVivero.put("nombreVivero",nombre);
-
-        } catch (JSONException exception) {
-            exception.printStackTrace();
-        }
-
-        RequestHandler.APIRequester.request(nombreVivero, ctx, RequestHandler.GETTELEFONOSVIVERO, new VolleyCallBack() {
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                Log.d(TAG,response.toString());
-                callBack.onSuccess(response);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-
-            @Override
-            public void noConnection() {
-
-            }
-
-            @Override
-            public void timedOut() {
-
-            }
-        });
-    }
-
-    /**
-     * Conseguir los horarios del vivero usando su nombre
-     */
-    public static void getHorarios(final Context ctx, final String nombre, final VolleyCallBack callBack){
-        JSONObject nombreVivero = new JSONObject();
-        try {
-            nombreVivero.put("nombreVivero",nombre);
-        } catch (JSONException exception) {
-            exception.printStackTrace();
-        }
-
-        RequestHandler.APIRequester.request(nombreVivero, ctx, RequestHandler.GETHORARIOSVIVERO, new VolleyCallBack() {
-            @Override
-            public void onSuccess(JSONObject response) {
-
-                Log.d(TAG,response.toString());
-                callBack.onSuccess(response);
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-
-            @Override
-            public void noConnection() {
-
-            }
-
-            @Override
-            public void timedOut() {
-
-            }
-        });
-    }
 }

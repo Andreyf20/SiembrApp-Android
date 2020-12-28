@@ -1,15 +1,10 @@
 package com.example.siembrapp.data.model;
 
-import android.util.Pair;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Vivero implements Serializable {
 
-    String nombre,direccion;
-    ArrayList<String> telefonos;
-    ArrayList<Pair<String,String>> horarios;
+    String nombre,direccion,telefonos,horarios;
 
     public Vivero(ViveroBuilder builder){
         this.nombre = builder.nombre;
@@ -18,46 +13,12 @@ public class Vivero implements Serializable {
         this.horarios = builder.horarios;
     }
 
-    public String getTelefonosStr(){
 
-        if(telefonos == null || telefonos.size() == 0){
-            return "NO INDICA";
-        }
-
-        String telefonosStr= "";
-
-        for (int i = 0; i < telefonos.size(); i++){
-
-            telefonosStr = telefonosStr.concat(telefonos.get(i) + "\n");
-
-        }
-
-        return telefonosStr.substring(0,telefonosStr.length()-1); //Retornamos el string sin el ultimo caracter que es \n
-    }
-
-    public String getHorariosStr(){
-
-        if(horarios == null || horarios.size() == 0){
-            return "NO INDICA";
-        }
-
-        String horariosStr= "";
-
-        for (int i = 0; i < horarios.size(); i++){
-
-            Pair<String,String> horarioPair = horarios.get(i);
-
-            horariosStr = horariosStr.concat(horarioPair.first +" / "+ horarioPair.second +"\n");
-
-        }
-        return horariosStr.substring(0,horariosStr.length()-1); //Retornamos el string sin el ultimo caracter que es \n
-    }
-
-    public ArrayList<String> getTelefonos() {
+    public String getTelefonos() {
         return telefonos;
     }
 
-    public ArrayList<Pair<String, String>> getHorarios() {
+    public String getHorarios() {
         return horarios;
     }
 
@@ -69,20 +30,10 @@ public class Vivero implements Serializable {
         return direccion;
     }
 
-    public void setTelefonos(ArrayList<String> telefonos) {
-        this.telefonos = telefonos;
-    }
-
-    public void setHorarios(ArrayList<Pair<String, String>> horarios){
-        this.horarios = horarios;
-    }
 
     public static class ViveroBuilder{
 
-        private String nombre,direccion;
-
-        private ArrayList<String> telefonos;
-        private ArrayList<Pair<String,String>> horarios;
+        private String nombre,direccion,telefonos,horarios;
 
         public ViveroBuilder setNombre(String nombre) {
             this.nombre = nombre;
@@ -94,12 +45,12 @@ public class Vivero implements Serializable {
             return this;
         }
 
-        public ViveroBuilder setTelefonos(ArrayList<String> telefonos) {
+        public ViveroBuilder setTelefonos(String telefonos) {
             this.telefonos = telefonos;
             return this;
         }
 
-        public ViveroBuilder setHorarios(ArrayList<Pair<String, String>> horarios) {
+        public ViveroBuilder setHorarios(String horarios) {
             this.horarios = horarios;
             return this;
         }

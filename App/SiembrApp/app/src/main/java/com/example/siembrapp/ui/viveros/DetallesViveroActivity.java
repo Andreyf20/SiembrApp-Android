@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.siembrapp.R;
+import com.example.siembrapp.data.model.Vivero;
 
 public class DetallesViveroActivity extends AppCompatActivity {
 
@@ -47,11 +48,13 @@ public class DetallesViveroActivity extends AppCompatActivity {
         //Recibimos el intent
         Intent intent = getIntent();
 
+        Vivero vivero = (Vivero) intent.getSerializableExtra("vivero");
+
         //Extraemos los datos y los asignamos a los componentes graficos
-        nombreViveroTV.setText(intent.getStringExtra("nombre"));
-        direccionET.setText(intent.getStringExtra("direccion"));
-        telefonosET.setText(intent.getStringExtra("telefonos"));
-        horariosET.setText(intent.getStringExtra("horarios"));
+        nombreViveroTV.setText(vivero.getNombre());
+        direccionET.setText(vivero.getDireccion());
+        telefonosET.setText(vivero.getTelefonos());
+        horariosET.setText(vivero.getHorarios());
     }
 
 }
