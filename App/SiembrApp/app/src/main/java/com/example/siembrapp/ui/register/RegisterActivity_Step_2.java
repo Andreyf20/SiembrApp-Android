@@ -26,21 +26,21 @@ public class RegisterActivity_Step_2 extends AppCompatActivity {
         trabajoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep3();
+                goToStep3("Trabajo");
             }
         });
 
         campannaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep3();
+                goToStep3("Campaña de reforestación");
             }
         });
 
         otroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep3();
+                goToStep3("Otro");
             }
         });
 
@@ -53,8 +53,20 @@ public class RegisterActivity_Step_2 extends AppCompatActivity {
 
     }
 
-    private void goToStep3(){
+    private void goToStep3(String razon){
         Intent registerStep3Intent = new Intent(getApplicationContext(), RegisterActivity_Step_3.class);
+
+        Bundle extras = getIntent().getExtras();
+        String nombre = extras.getString("nombre");
+        String apellidos = extras.getString("apellidos");
+        String email = extras.getString("email");
+        String password = extras.getString("password");
+        registerStep3Intent.putExtra("nombre", nombre);
+        registerStep3Intent.putExtra("apellidos", apellidos);
+        registerStep3Intent.putExtra("email", email);
+        registerStep3Intent.putExtra("password", password);
+        registerStep3Intent.putExtra("razon", razon);
+
         startActivity(registerStep3Intent);
     }
 }

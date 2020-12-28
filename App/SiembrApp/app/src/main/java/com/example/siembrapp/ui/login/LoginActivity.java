@@ -29,6 +29,7 @@ import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.Permissions.Checker.PermChecker;
 import com.example.siembrapp.R;
 import com.example.siembrapp.data.model.God;
+import com.example.siembrapp.ui.register.RegisterActivity_Step_1;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -154,6 +155,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkPermissions();
+            }
+        });
+
+        registerEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerActivityIntent = new Intent(getApplicationContext(), RegisterActivity_Step_1.class);
+                startActivity(registerActivityIntent);
             }
         });
 
