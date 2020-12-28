@@ -73,6 +73,7 @@ public class RegisterActivity_Step_1 extends AppCompatActivity {
                 registerStep2Intent.putExtra("password", password);
 
                 startActivity(registerStep2Intent);
+                finish();
             }
         });
 

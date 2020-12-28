@@ -68,5 +68,6 @@ public class RegisterActivity_Step_2 extends AppCompatActivity {
         registerStep3Intent.putExtra("razon", razon);
 
         startActivity(registerStep3Intent);
+        finish();
     }
 }

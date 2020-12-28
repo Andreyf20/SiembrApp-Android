@@ -59,12 +59,13 @@ public class RequestHandler {
     public static final int LISTVIVEROS = 5;
     public static final int GETTELEFONOSVIVERO = 6;
     public static final int GETHORARIOSVIVERO = 7;
+    public static final int REGISTERUSER = 8;
 
 
     //JSONObject, MODE.LOGIN
     public static class APIRequester{
 
-        private static final String APIURL = "http://ipconfig:5000/api/";
+        private static final String APIURL = "http://192.168.0.3:5000/api/";
 
         public static void request(JSONObject params,Context ctx,int mode, VolleyCallBack callback){
 
@@ -102,6 +103,11 @@ public class RequestHandler {
                 case GETHORARIOSVIVERO:
 
                     getHorariosDeVivero(params,ctx,callback);
+                    break;
+
+                case REGISTERUSER:
+
+                    registerUser(params, ctx, callback);
                     break;
 
                 default:
@@ -325,6 +331,38 @@ public class RequestHandler {
                     callback.onSuccess(response);
                 }
             };
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyParams,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
+        }
+
+        private static void registerUser(JSONObject bodyParams, Context ctx, final VolleyCallBack callback){
+            //Request url
+            String url = APIURL +"register_user";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    callback.onSuccess(response);
+                }
+            };
+
             //Instanciar error listener
             Response.ErrorListener errorListener = new Response.ErrorListener() {
                 @Override
