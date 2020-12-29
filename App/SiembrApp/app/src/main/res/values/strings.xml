@@ -51,5 +51,14 @@
     <string name="telefonoLbl">Teléfonos</string>
     <string name="horarioLbl">Horario</string>
     <string name="habilitar_permisos">Habilitar Permisos</string>
+    <string name="next_step">Siguiente</string>
+    <string name="recommended_regions">Regiones Recomendadas</string>
+    <string name="central_region">Región Central</string>
+    <string name="chorotega_region">Región Chorotega</string>
+    <string name="pacifico_central_region">Región Pacífico Central</string>
+    <string name="brunca_region">Región Brunca</string>
+    <string name="huetar_norte_region">Región Huetar Norte</string>
+    <string name="huetar_atlantica_region">Región Huetar Atlántica</string>
+    <string name="que_sembrar_text">🔎 <u>¿Qué sembrar?</u></string>
 
 </resources>

@@ -61,7 +61,7 @@ public class RequestHandler {
     
     public static class APIRequester{
 
-        private static final String APIURL = "http://192.168.50.37:5000/api/";
+        private static final String APIURL = "http://192.168.0.3:5000/api/";
 
         public static void request(JSONObject params,Context ctx,int mode, VolleyCallBack callback){
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.quesembrar.steps.QueSembrar_Step_1">
+
+    <ImageButton
+        android:id="@+id/atrasBtn2"
+        android:layout_width="61dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="1dp"
+        android:background="@color/White"
+        android:minWidth="50dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/recommended_regions_txtview"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test" />
+
+    <TextView
+        android:id="@+id/recommended_regions_txtview"
+        android:layout_width="285dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/recommended_regions"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/region_central"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorPrimaryDark"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/central_region"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recommended_regions_txtview" />
+
+    <Button
+        android:id="@+id/region_chorotega"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryDark"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/chorotega_region"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/region_central" />
+
+    <Button
+        android:id="@+id/region_pacifico_central"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryDark"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/pacifico_central_region"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/region_chorotega" />
+
+    <Button
+        android:id="@+id/region_brunca"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryDark"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/brunca_region"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/region_pacifico_central" />
+
+    <Button
+        android:id="@+id/region_huetar_norte"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryDark"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/huetar_norte_region"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/region_brunca" />
+
+    <Button
+        android:id="@+id/region_huetar_atlantica"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimaryDark"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/huetar_atlantica_region"
+        android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/region_huetar_norte" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
