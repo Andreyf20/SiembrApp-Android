@@ -78,9 +78,9 @@ public class QueSembrar_Step_1 extends AppCompatActivity {
     }
 
     private void next_step(String region){
-        //Intent queSembrarStep2 = new Intent(getApplicationContext(), QueSembrar_Step_2.class);
-        //queSembrarStep2.putExtra("region", region);
-        //startActivity(queSembrarStep2);
+        Intent queSembrarStep2 = new Intent(getApplicationContext(), QueSembrar_Step_2.class);
+        queSembrarStep2.putExtra("region", region);
+        startActivity(queSembrarStep2);
         finish();
     }
 }
