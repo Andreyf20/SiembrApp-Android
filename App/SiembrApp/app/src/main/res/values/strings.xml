@@ -61,5 +61,14 @@
     <string name="huetar_atlantica_region">Región Huetar Atlántica</string>
     <string name="que_sembrar_text">🔎 <u>¿Qué sembrar?</u></string>
     <string name="que_sembrar_description">Cuéntanos cómo se ve la vegetación en el espacio donde quieres hacer la reforestación</string>
+    <string name="que_sembrar_light_description">¿Qué cantidad de luz recibe el terreno donde se va a hacer la reforestación?</string>
+    <string name="light_level_1"><b>Mucha luz constantemente</b></string>
+    <string name="light_level_1_2">Al rededor no hay objetos que obstruyan la luz</string>
+    <string name="light_level_2_1">Mucha luz en ocasiones</string>
+    <string name="light_level_2_2">Hay pocos objetos no muy grandes al rededor</string>
+    <string name="light_level_3_1">Luz regular en ocasiones</string>
+    <string name="light_level_3_2">Hay algunos objetos grandes al rededor</string>
+    <string name="light_level_4_1">Poca luz</string>
+    <string name="light_level_4_2">Al rededor hay muchos objetos que obstruyen la luz</string>
 
 </resources>
