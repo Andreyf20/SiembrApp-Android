@@ -1,6 +1,7 @@
 package com.example.siembrapp.ui.quesembrar.steps;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.siembrapp.R;
+
+import java.util.ArrayList;
 
 public class QueSembrar_Step_2 extends AppCompatActivity {
     protected int progressValue = 1;
@@ -31,12 +34,13 @@ public class QueSembrar_Step_2 extends AppCompatActivity {
             }
         });
 
-        ImageView imgView = findViewById(R.id.que_sembrar_imageView);
+        final ImageView imgView = findViewById(R.id.que_sembrar_imageView);
         SeekBar seekBar = findViewById(R.id.que_sembrar_seekBar);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // REF: https://abhiandroid.com/ui/seekbar
             int progressChangedValue = 1;
+            final int[] drawables = new int[]{R.drawable.stage1, R.drawable.stage2, R.drawable.stage3, R.drawable.stage4};
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressChangedValue = progress;
@@ -50,6 +54,7 @@ public class QueSembrar_Step_2 extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //Toast.makeText(QueSembrar_Step_2.this, "Seek bar progress is :" + progressChangedValue,
                 //        Toast.LENGTH_SHORT).show();
+                imgView.setImageDrawable(ContextCompat.getDrawable(QueSembrar_Step_2.this, drawables[progressChangedValue]));
             }
         });
 
