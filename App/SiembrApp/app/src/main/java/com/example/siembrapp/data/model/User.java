@@ -43,6 +43,30 @@ public class User implements Serializable {
         return nombre;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getTipoOrganizacion() {
+        return tipoOrganizacion;
+    }
+
+    public void setTipoOrganizacion(String tipoOrganizacion) {
+        this.tipoOrganizacion = tipoOrganizacion;
+    }
+
+    public String getRazon() {
+        return razon;
+    }
+
+    public void setRazon(String razon) {
+        this.razon = razon;
+    }
+
     public static class UserBuilder{
         private String uuid, nombre, correo, tipoOrganizacion, razon;
 

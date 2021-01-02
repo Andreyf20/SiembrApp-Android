@@ -70,5 +70,7 @@
     <string name="light_level_3_2">Hay algunos objetos grandes al rededor</string>
     <string name="light_level_4_1">Poca luz</string>
     <string name="light_level_4_2">Al rededor hay muchos objetos que obstruyen la luz</string>
+    <string name="edit_user_info">Presiona para editar</string>
+    <string name="user_info_update">Actualizar usuario</string>
 
 </resources>
