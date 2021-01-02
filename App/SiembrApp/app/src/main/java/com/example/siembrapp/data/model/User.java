@@ -6,6 +6,11 @@ import java.util.ArrayList;
 public class User implements Serializable {
 
     private final String uuid;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     private String nombre;
     private String correo;
     private String tipoOrganizacion;
