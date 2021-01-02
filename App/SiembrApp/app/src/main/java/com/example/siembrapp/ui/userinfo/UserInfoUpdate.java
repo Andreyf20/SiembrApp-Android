@@ -77,6 +77,7 @@ public class UserInfoUpdate extends AppCompatActivity implements AdapterView.OnI
                     params.put("nombre", nombre);
                     params.put("correo", correo);
                     params.put("tipoOrganizacion", tipoOrganizacion);
+                    params.put("uuid", user.getUuid());
 
                     Dialog dialog = new Dialog(UserInfoUpdate.this);
                     final ProgressDialog pDialog = new ProgressDialog(dialog.getContext());
