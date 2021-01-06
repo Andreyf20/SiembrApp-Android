@@ -59,6 +59,7 @@ public class RequestHandler {
     public static final int LISTVIVEROS = 5;
     public static final int REGISTERUSER = 6;
     public static final int UPDATEUSER = 7;
+    public static final int GETPLANTSFILTROS = 8;
 
     public static class APIRequester{
 
@@ -100,6 +101,11 @@ public class RequestHandler {
                 case UPDATEUSER:
 
                     updateUser(params, ctx, callback);
+                    break;
+
+                case GETPLANTSFILTROS:
+
+                    getPlantasFiltros(params, ctx, callback);
                     break;
 
                 default:
@@ -314,6 +320,38 @@ public class RequestHandler {
         private static void updateUser(JSONObject bodyParams, Context ctx, final VolleyCallBack callback){
             //Request url
             String url = APIURL +"update_user";
+
+            //Instanciar Listener para el JsonObjectRequest
+            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    callback.onSuccess(response);
+                }
+            };
+
+            //Instanciar error listener
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    if (error.getClass().equals(NoConnectionError.class)) {
+                        callback.noConnection();
+                        return;
+                    }
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        callback.timedOut();
+                        return;
+                    }
+                    callback.onFailure();
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,url,bodyParams,responseListener,errorListener);
+            RequestQueueSingleton.getInstance(ctx).getRequestQueue().add(request);
+        }
+
+        private static void getPlantasFiltros(JSONObject bodyParams, Context ctx, final VolleyCallBack callback){
+            //Request url
+            String url = APIURL +"ver_plantas";
 
             //Instanciar Listener para el JsonObjectRequest
             Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
