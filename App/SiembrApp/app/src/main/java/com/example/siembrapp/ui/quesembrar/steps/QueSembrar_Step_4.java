@@ -8,6 +8,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,8 +27,9 @@ import org.json.JSONObject;
 
 public class QueSembrar_Step_4 extends AppCompatActivity {
     private final String TAG = "quesembrar4";
-    private LinearLayout layout;
-    private LinearLayout.LayoutParams layoutParams;
+
+    private LayoutInflater inflater;
+    private LinearLayout gallery;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -34,9 +37,8 @@ public class QueSembrar_Step_4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_que_sembrar__step_4);
 
-        layout = findViewById(R.id.image_container);
-        layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
+        gallery = findViewById(R.id.gallery);
+        inflater = LayoutInflater.from(this);
 
         TextView title = findViewById(R.id.que_sembrar_light_title_textView2);
 
@@ -106,16 +108,17 @@ public class QueSembrar_Step_4 extends AppCompatActivity {
         Log.d(TAG, "setPlantas: " + plantas.length());
 
         // Add 4 images
+        for (int i = 0; i < 10; i++){
+            View view = inflater.inflate(R.layout.planta_user_item, gallery, false);
 
-        for (int i = 0; i < 4; i++) {
-            layoutParams.setMargins(20, 20, 20, 20);
-            layoutParams.gravity = Gravity.CENTER;
-            ImageView imageView = new ImageView(QueSembrar_Step_4.this);
-            imageView.setImageResource(R.drawable.ic_back_arrow);
-            // imageView.setOnClickListener();
-            imageView.setLayoutParams(layoutParams);
+            TextView textView = view.findViewById(R.id.planta_user_item_textView);
+            textView.setText(String.valueOf(i));
 
-            layout.addView(imageView);
+            ImageView imageView = view.findViewById(R.id.planta_user_item_imageView);
+            imageView.setImageResource(R.drawable.stage4);
+
+            gallery.addView(view);
         }
+
     }
 }
