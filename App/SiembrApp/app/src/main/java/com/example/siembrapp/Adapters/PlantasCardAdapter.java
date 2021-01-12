@@ -2,6 +2,7 @@ package com.example.siembrapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,11 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
 
         // Foto de icono eucalyptus temporalmente
         ImageView img = holder.img;
-        img.setImageResource(R.drawable.ic_eucalyptus);
+        Bitmap bmp = planta.getImage();
+        if(bmp != null){
+            img.setImageBitmap(bmp);
+        }else
+            img.setImageResource(R.drawable.ic_eucalyptus);
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override

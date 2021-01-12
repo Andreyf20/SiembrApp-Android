@@ -266,7 +266,7 @@ public class God {
                                )
                                .setUsosConocidos(
                                        new ArrayList<>(Arrays.asList(usos))
-                               );
+                               ).setImagen(element.getString("imagen"));
 
                        plantas.add(plantaBuilder.build());
                    }

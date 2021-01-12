@@ -1,11 +1,15 @@
 package com.example.siembrapp.data.model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Planta implements Serializable {
 
-    private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,habito;
+    private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,habito,imagen;
     private ArrayList<String> usosConocidos,paisajeRecomendado;
     private double minRangoAltitudinal,maxRangoAltitudinal,metros;
 
@@ -27,6 +31,7 @@ public class Planta implements Serializable {
         this.minRangoAltitudinal = builder.minRangoAltitudinal;
         this.maxRangoAltitudinal = builder.maxRangoAltitudinal;
         this.metros = builder.metros;
+        this.imagen = builder.imagen;
     }
 
     public String getNombreComun() {
@@ -39,6 +44,19 @@ public class Planta implements Serializable {
 
     public String getNombreCientifico() {
         return nombreCientifico;
+    }
+
+    public String getImagenBase64() {
+        return imagen;
+    }
+
+    public Bitmap getImage(){
+        Bitmap bmp = null;
+        if(!this.imagen.equals("")){
+            byte[] decodedString = Base64.decode(this.imagen, Base64.DEFAULT);
+            bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        }
+        return bmp;
     }
 
     public String getFamilia() {
@@ -141,6 +159,7 @@ public class Planta implements Serializable {
     public static class PlantaBuilder{
 
         private String nombreComun,nombreCientifico,familia,origen,fenologia,agentePolinizador,requerimientosDeLuz,metodoDispersion,fruto,texturaFruto,flor,habito;
+        private String imagen = "";
         private ArrayList<String> usosConocidos,paisajeRecomendado;
         private double minRangoAltitudinal,maxRangoAltitudinal,metros;
 
@@ -226,6 +245,11 @@ public class Planta implements Serializable {
 
         public PlantaBuilder setMetros(double metros) {
             this.metros = metros;
+            return this;
+        }
+
+        public PlantaBuilder setImagen(String imageBase64){
+            this.imagen = imageBase64;
             return this;
         }
 
