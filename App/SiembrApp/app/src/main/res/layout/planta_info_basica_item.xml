@@ -23,7 +23,8 @@
                 android:id="@+id/fotoIV"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_eucalyptus"/>
+                android:src="@drawable/ic_eucalyptus"
+                android:paddingStart="10dp"/>
 
             <TextView
                 android:id="@+id/infoTV"
