@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -14,10 +16,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
+import com.example.siembrapp.API.RequestHandler;
+import com.example.siembrapp.Interfaces.VolleyCallBack;
+import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
+import com.example.siembrapp.data.model.God;
 import com.example.siembrapp.data.model.Planta;
+import com.example.siembrapp.ui.login.LoginActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class DetallePlantaActivity extends AppCompatActivity {
+
+    boolean like_state;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -26,14 +38,71 @@ public class DetallePlantaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_planta);
         Intent intent = getIntent();
         Planta plantaFocused = (Planta) intent.getSerializableExtra("planta");
-        boolean like_state = intent.getBooleanExtra("like_state", false);
+        like_state = intent.getBooleanExtra("like_state", false);
         ImageButton backBtn = findViewById(R.id.detallesPlantaBackBtn);
 
-        ImageView like = findViewById(R.id.like);
+        final ImageView like = findViewById(R.id.like);
         if(like_state)
             like.setImageDrawable(getDrawable(R.drawable.unlike));
         else
             like.setImageDrawable(getDrawable(R.drawable.like));
+
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Ref: https://stackoverflow.com/a/50716727
+                Dialog dialog = new Dialog(DetallePlantaActivity.this);
+                final ProgressDialog pDialog = new ProgressDialog(dialog.getContext());
+                pDialog.setMessage("Agregando planta a favoritos...");
+                pDialog.show();
+
+                JSONObject params = new JSONObject();
+
+                RequestHandler.APIRequester.request(params, getApplicationContext(), RequestHandler.DUMMYREQUEST, new VolleyCallBack() {
+                    @Override
+                    public void onSuccess(JSONObject object) {
+
+                        try {
+                            //Consumimos el objeto json del RequestResponse
+                            String response = object.getString("ok");
+                            if(response.equals("1")){
+                                Toast.makeText(getApplicationContext(), "TEST SUCCESS", Toast.LENGTH_SHORT).show();
+                                if(like_state){
+                                    like.setImageDrawable(getDrawable(R.drawable.like));
+                                    like_state = false;
+                                }else{
+                                    like.setImageDrawable(getDrawable(R.drawable.unlike));
+                                    like_state = true;
+                                }
+                            }else {
+                                Toast.makeText(getApplicationContext(), "TEST ERROR!!", Toast.LENGTH_SHORT).show();
+                            }
+                            pDialog.dismiss();
+                        } catch (JSONException exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        pDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "ERROR DEL SERVIDOR!!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void noConnection() {
+                        pDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), R.string.connectionError, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void timedOut() {
+                        pDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), R.string.timedouterror, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
 
         // Referencias a componentes graficos
         TextView nombreComunTV, nombreCientificoTV,familiaTV,origenTV,habitoTV,rangoTV,requerimientosLuzTV,fenologiaTV,polinizadorTV,dispersionTV,frutoTV,texturaFrutaTV,florTV,usosTV,paisajesTV;
