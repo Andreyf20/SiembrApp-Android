@@ -3,10 +3,13 @@ package com.example.siembrapp.ui.detallesPlanta;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,13 +19,21 @@ import com.example.siembrapp.data.model.Planta;
 
 public class DetallePlantaActivity extends AppCompatActivity {
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_planta);
         Intent intent = getIntent();
         Planta plantaFocused = (Planta) intent.getSerializableExtra("planta");
+        boolean like_state = intent.getBooleanExtra("like_state", false);
         ImageButton backBtn = findViewById(R.id.detallesPlantaBackBtn);
+
+        ImageView like = findViewById(R.id.like);
+        if(like_state)
+            like.setImageDrawable(getDrawable(R.drawable.unlike));
+        else
+            like.setImageDrawable(getDrawable(R.drawable.like));
 
         // Referencias a componentes graficos
         TextView nombreComunTV, nombreCientificoTV,familiaTV,origenTV,habitoTV,rangoTV,requerimientosLuzTV,fenologiaTV,polinizadorTV,dispersionTV,frutoTV,texturaFrutaTV,florTV,usosTV,paisajesTV;

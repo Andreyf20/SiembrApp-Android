@@ -77,6 +77,7 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
 
                 Intent detallePlantaIntent = new Intent(v.getContext(), DetallePlantaActivity.class);
                 detallePlantaIntent.putExtra("planta", planta);
+                detallePlantaIntent.putExtra("like_state", true);
                 v.getContext().startActivity(detallePlantaIntent);
             }
         });

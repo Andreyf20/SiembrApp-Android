@@ -73,6 +73,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -469,6 +470,15 @@
                         </ScrollView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/like"
+                    android:layout_gravity="end"
+                    android:paddingEnd="20dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:srcCompat="@drawable/like" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
