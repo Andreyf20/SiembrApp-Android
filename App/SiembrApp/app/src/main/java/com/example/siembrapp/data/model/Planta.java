@@ -53,6 +53,7 @@ public class Planta implements Serializable {
     public Bitmap getImage(){
         Bitmap bmp = null;
         if(!this.imagen.equals("")){
+            //REF: https://stackoverflow.com/questions/4837110/how-to-convert-a-base64-string-into-a-bitmap-image-to-show-it-in-a-imageview
             byte[] decodedString = Base64.decode(this.imagen, Base64.DEFAULT);
             bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         }

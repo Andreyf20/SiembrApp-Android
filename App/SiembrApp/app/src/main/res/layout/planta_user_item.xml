@@ -19,4 +19,11 @@
         android:layout_height="wrap_content"
         android:text="TEST" />
 
+    <TextView
+        android:id="@+id/planta_user_item_index"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="TextView" />
+
 </LinearLayout>
