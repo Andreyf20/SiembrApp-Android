@@ -37,7 +37,7 @@ public class DetallePlantaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_planta);
         Intent intent = getIntent();
-        Planta plantaFocused = (Planta) intent.getSerializableExtra("planta");
+        final Planta plantaFocused = (Planta) intent.getSerializableExtra("planta");
         like_state = intent.getBooleanExtra("like_state", false);
         ImageButton backBtn = findViewById(R.id.detallesPlantaBackBtn);
 
@@ -53,54 +53,60 @@ public class DetallePlantaActivity extends AppCompatActivity {
                 //Ref: https://stackoverflow.com/a/50716727
                 Dialog dialog = new Dialog(DetallePlantaActivity.this);
                 final ProgressDialog pDialog = new ProgressDialog(dialog.getContext());
-                pDialog.setMessage("Agregando planta a favoritos...");
+                pDialog.setMessage("Actualizando información...");
                 pDialog.show();
 
                 JSONObject params = new JSONObject();
+                try {
+                    params.put("userId", God.getLoggedUserId());
+                    params.put("nombrePlanta", plantaFocused.getNombreCientifico());
 
-                RequestHandler.APIRequester.request(params, getApplicationContext(), RequestHandler.DUMMYREQUEST, new VolleyCallBack() {
-                    @Override
-                    public void onSuccess(JSONObject object) {
+                    RequestHandler.APIRequester.request(params, getApplicationContext(), RequestHandler.PLANTANUEVA, new VolleyCallBack() {
+                        @Override
+                        public void onSuccess(JSONObject object) {
 
-                        try {
-                            //Consumimos el objeto json del RequestResponse
-                            String response = object.getString("ok");
-                            if(response.equals("1")){
-                                Toast.makeText(getApplicationContext(), "TEST SUCCESS", Toast.LENGTH_SHORT).show();
-                                if(like_state){
-                                    like.setImageDrawable(getDrawable(R.drawable.like));
-                                    like_state = false;
-                                }else{
-                                    like.setImageDrawable(getDrawable(R.drawable.unlike));
-                                    like_state = true;
+                            try {
+                                //Consumimos el objeto json del RequestResponse
+                                String response = object.getString("ok");
+                                if(response.equals("1")){
+                                    Toast.makeText(getApplicationContext(), "TEST SUCCESS", Toast.LENGTH_SHORT).show();
+                                    if(like_state){
+                                        like.setImageDrawable(getDrawable(R.drawable.like));
+                                        like_state = false;
+                                    }else{
+                                        like.setImageDrawable(getDrawable(R.drawable.unlike));
+                                        like_state = true;
+                                    }
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "TEST ERROR!!", Toast.LENGTH_SHORT).show();
                                 }
-                            }else {
-                                Toast.makeText(getApplicationContext(), "TEST ERROR!!", Toast.LENGTH_SHORT).show();
+                                pDialog.dismiss();
+                            } catch (JSONException exception) {
+                                exception.printStackTrace();
                             }
-                            pDialog.dismiss();
-                        } catch (JSONException exception) {
-                            exception.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onFailure() {
-                        pDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "ERROR DEL SERVIDOR!!", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onFailure() {
+                            pDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "ERROR DEL SERVIDOR!!", Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void noConnection() {
-                        pDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), R.string.connectionError, Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void noConnection() {
+                            pDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), R.string.connectionError, Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void timedOut() {
-                        pDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), R.string.timedouterror, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void timedOut() {
+                            pDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), R.string.timedouterror, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

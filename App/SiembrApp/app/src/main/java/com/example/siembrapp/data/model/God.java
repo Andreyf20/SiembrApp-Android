@@ -31,6 +31,8 @@ public class God {
     // Usuario loggeado
     private static User loggedUser;
 
+    private static int loggedUserId;
+
     public static User getLoggedUser(){
         return loggedUser;
     }
@@ -167,6 +169,12 @@ public class God {
             RequestHandler.APIRequester.request(params, ctx, RequestHandler.GETUSERID, new VolleyCallBack() {
                 @Override
                 public void onSuccess(JSONObject objectwithid) {
+
+                    try {
+                        loggedUserId = objectwithid.getInt("id");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     //Utilizando el UUID recibimos el id del usuario y lo pasamos directo al metodo para cargar las plantas
                     //del usuario
@@ -364,4 +372,7 @@ public class God {
         }
     }
 
+    public static int getLoggedUserId() {
+        return loggedUserId;
+    }
 }
