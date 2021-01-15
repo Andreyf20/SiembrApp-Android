@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +44,22 @@ public class QueSembrarShowAll extends AppCompatActivity {
         setContentView(R.layout.activity_que_sembrar_show_all);
 
         input = findViewById(R.id.search_plant_input);
+        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Log.d("PRUEBA", "onEditorAction: ");
+                    // hide virtual keyboard
+                    InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                    loadPlants(false);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
         rv = findViewById(R.id.show_all_recyclerView);
 
         Bundle extras = getIntent().getExtras();
@@ -57,7 +77,7 @@ public class QueSembrarShowAll extends AppCompatActivity {
         filtrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadPlants();
+                loadPlants(true);
             }
         });
 
@@ -65,7 +85,7 @@ public class QueSembrarShowAll extends AppCompatActivity {
         title.setText(region);
     }
 
-    private void loadPlants(){
+    private void loadPlants(boolean closeKeyboard){
         String in = input.getText().toString();
 
         if(in.equals("")){
@@ -74,7 +94,8 @@ public class QueSembrarShowAll extends AppCompatActivity {
             return;
         }
 
-        input.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        if(closeKeyboard)
+            input.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
         try {
             JSONObject params = new JSONObject();
@@ -175,7 +196,7 @@ public class QueSembrarShowAll extends AppCompatActivity {
     private void setPlantas(List<Planta> plantas){
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        PlantasCardAdapter adapter = new PlantasCardAdapter(plantas);
+        PlantasCardAdapter adapter = new PlantasCardAdapter(plantas, false);
 
         rv.setAdapter(adapter);
 

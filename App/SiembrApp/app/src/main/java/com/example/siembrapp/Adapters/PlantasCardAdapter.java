@@ -22,9 +22,11 @@ import java.util.List;
 public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.ViewHolder>{
 
     private List<Planta> plantas;
+    private final boolean newList;
 
-    public PlantasCardAdapter(List<Planta> plantas){
+    public PlantasCardAdapter(List<Planta> plantas, boolean newList){
         this.plantas = plantas;
+        this.newList = newList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -78,6 +80,7 @@ public class PlantasCardAdapter extends RecyclerView.Adapter<PlantasCardAdapter.
                 Intent detallePlantaIntent = new Intent(v.getContext(), DetallePlantaActivity.class);
                 detallePlantaIntent.putExtra("planta", planta);
                 detallePlantaIntent.putExtra("like_state", true);
+                detallePlantaIntent.putExtra("like_state", newList);
                 v.getContext().startActivity(detallePlantaIntent);
             }
         });

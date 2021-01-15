@@ -45,7 +45,7 @@ public class MisPlantasFragment extends Fragment {
 
         plantasrv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new PlantasCardAdapter(God.getLoggedUser().getPlantas());
+        adapter = new PlantasCardAdapter(God.getLoggedUser().getPlantas(), true);
 
         plantasrv.setAdapter(adapter);
 
@@ -77,7 +77,7 @@ public class MisPlantasFragment extends Fragment {
                 public void onSuccess(JSONObject object) {
                     //Toast.makeText(root.getContext(), "Se cargaron los datos de nuevo", Toast.LENGTH_SHORT).show();
 
-                    adapter = new PlantasCardAdapter(God.getLoggedUser().getPlantas());
+                    adapter = new PlantasCardAdapter(God.getLoggedUser().getPlantas(), true);
 
                     plantasrv.setAdapter(adapter);
 
