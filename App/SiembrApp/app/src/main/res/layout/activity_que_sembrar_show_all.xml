@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.quesembrar.steps.QueSembrarShowAll">
+
+    <TextView
+        android:id="@+id/que_sembrar_light_title_textView3"
+        android:layout_width="263dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="50dp"
+        android:text="XD"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/que_sembrar_light_description_textView"
+        app:layout_constraintStart_toEndOf="@+id/atrasBtn8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/search_plant_input"
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/Search"
+        android:inputType="textPersonName"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/que_sembrar_light_title_textView3" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="43dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/atrasBtn8"
+        app:srcCompat="@drawable/search" />
+
+    <ImageButton
+        android:id="@+id/atrasBtn8"
+        android:layout_width="61dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/White"
+        android:minWidth="50dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/show_all_recyclerView"
+        android:layout_width="408dp"
+        android:layout_height="551dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_plant_input" />
+
+    <TextView
+        android:id="@+id/filtrar_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="34dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        android:text="@string/FILTER"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

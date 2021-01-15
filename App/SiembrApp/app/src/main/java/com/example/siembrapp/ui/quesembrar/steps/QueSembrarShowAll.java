@@ -1,32 +1,25 @@
 package com.example.siembrapp.ui.quesembrar.steps;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.siembrapp.API.RequestHandler;
+import com.example.siembrapp.Adapters.PlantasCardAdapter;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
 import com.example.siembrapp.R;
 import com.example.siembrapp.data.model.God;
 import com.example.siembrapp.data.model.Planta;
-import com.example.siembrapp.ui.detallesPlanta.DetallePlantaActivity;
-import com.example.siembrapp.ui.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,25 +27,25 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
-public class QueSembrar_Step_4 extends AppCompatActivity {
-    private final String TAG = "quesembrar4";
+public class QueSembrarShowAll extends AppCompatActivity {
+    EditText input;
+    RecyclerView rv;
 
-    private LayoutInflater inflater;
-    private LinearLayout gallery;
-
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_que_sembrar__step_4);
+        setContentView(R.layout.activity_que_sembrar_show_all);
 
-        gallery = findViewById(R.id.gallery);
-        inflater = LayoutInflater.from(this);
+        input = findViewById(R.id.search_plant_input);
+        rv = findViewById(R.id.show_all_recyclerView);
 
-        TextView title = findViewById(R.id.que_sembrar_light_title_textView2);
+        Bundle extras = getIntent().getExtras();
+        final String region = extras.getString("region");
 
-        ImageView atrasBTN = findViewById(R.id.atrasBtn7);
+        ImageView atrasBTN = findViewById(R.id.atrasBtn8);
         atrasBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,34 +53,38 @@ public class QueSembrar_Step_4 extends AppCompatActivity {
             }
         });
 
-
-        Bundle extras = getIntent().getExtras();
-        final String region = extras.getString("region");
-        int step = extras.getInt("step");
-        String light = extras.getString("luz");
-
-        Button show_all = findViewById(R.id.show_all_button);
-        show_all.setOnClickListener(new View.OnClickListener() {
+        TextView filtrar = findViewById(R.id.filtrar_textView);
+        filtrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent showAll = new Intent(getApplicationContext(), QueSembrarShowAll.class);
-                showAll.putExtra("region", region);
-                startActivity(showAll);
+                loadPlants();
             }
         });
 
+        TextView title = findViewById(R.id.que_sembrar_light_title_textView3);
         title.setText(region);
+    }
+
+    private void loadPlants(){
+        String in = input.getText().toString();
+
+        if(in.equals("")){
+            //Toast
+            Toast.makeText(getApplicationContext(), "Error, por favor revisar los datos introducidos!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        input.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
         try {
             JSONObject params = new JSONObject();
             JSONArray arr = new JSONArray();
-            arr.put(light);
-            arr.put(region);
+            arr.put(in);
             params.put("filtros", arr);
 
-            Dialog dialog = new Dialog(QueSembrar_Step_4.this);
+            Dialog dialog = new Dialog(QueSembrarShowAll.this);
             final ProgressDialog pDialog = new ProgressDialog(dialog.getContext());
-            pDialog.setMessage("Buscando los mejores resultados...");
+            pDialog.setMessage("Buscando...");
             pDialog.show();
 
             RequestHandler.APIRequester.request(params, getApplicationContext(), RequestHandler.GETPLANTSFILTROS, new VolleyCallBack() {
@@ -175,39 +172,13 @@ public class QueSembrar_Step_4 extends AppCompatActivity {
         }
     }
 
-    private void setPlantas(final ArrayList<Planta> plantas){
-        // Add all plants gotten from the query
-        for (int i = 0; i < plantas.size(); i++){
-            final View view = inflater.inflate(R.layout.planta_user_item, gallery, false);
+    private void setPlantas(List<Planta> plantas){
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-            TextView textView = view.findViewById(R.id.planta_user_item_textView);
-            textView.setText(plantas.get(i).getNombreComun());
+        PlantasCardAdapter adapter = new PlantasCardAdapter(plantas);
 
-            TextView index = view.findViewById(R.id.planta_user_item_index);
-            index.setText(String.valueOf(i));
+        rv.setAdapter(adapter);
 
-            ImageView imageView = view.findViewById(R.id.planta_user_item_imageView);
-            Bitmap bmp = plantas.get(i).getImage();
-
-            // Handle errors with base64 image string
-            if(bmp != null)
-                imageView.setImageBitmap(bmp);
-            else
-                imageView.setImageResource(R.drawable.stage4);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TextView index = v.findViewById(R.id.planta_user_item_index);
-                    int i = Integer.parseInt(index.getText().toString());
-
-                    Intent detallePlantaIntent = new Intent(v.getContext(), DetallePlantaActivity.class);
-                    detallePlantaIntent.putExtra("planta", plantas.get(i));
-                    v.getContext().startActivity(detallePlantaIntent);
-                }
-            });
-
-            gallery.addView(view);
-        }
+        Objects.requireNonNull(rv.getAdapter()).notifyDataSetChanged();
     }
 }

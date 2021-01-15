@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.userinfo.UserInfoUpdate"></activity>
+        <activity android:name=".ui.quesembrar.steps.QueSembrarShowAll"></activity>
+        <activity android:name=".ui.userinfo.UserInfoUpdate" />
         <activity android:name=".ui.userinfo.UserInfo" />
         <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_4" />
         <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_3" />

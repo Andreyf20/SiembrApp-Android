@@ -74,5 +74,7 @@
     <string name="user_info_update">Actualizar usuario</string>
     <string name="show_all">Mostrar todos</string>
     <string name="best_results">Mejores resultados de la búsqueda</string>
+    <string name="Search">Buscar</string>
+    <string name="FILTER">FILTRAR</string>
 
 </resources>
