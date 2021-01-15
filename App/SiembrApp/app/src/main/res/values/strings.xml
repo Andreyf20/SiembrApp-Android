@@ -59,7 +59,7 @@
     <string name="brunca_region">Región Brunca</string>
     <string name="huetar_norte_region">Región Huetar Norte</string>
     <string name="huetar_atlantica_region">Región Huetar Atlántica</string>
-    <string name="que_sembrar_text">🔎 <u>¿Qué sembrar?</u></string>
+    <string name="que_sembrar_text"><u>¿Qué sembrar?</u></string>
     <string name="que_sembrar_description">Cuéntanos cómo se ve la vegetación en el espacio donde quieres hacer la reforestación</string>
     <string name="que_sembrar_light_description">¿Qué cantidad de luz recibe el terreno donde se va a hacer la reforestación?</string>
     <string name="light_level_1"><b>Mucha luz constantemente</b></string>
