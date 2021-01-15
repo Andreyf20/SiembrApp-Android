@@ -69,7 +69,7 @@ public class DetallePlantaActivity extends AppCompatActivity {
                                 //Consumimos el objeto json del RequestResponse
                                 String response = object.getString("ok");
                                 if(response.equals("1")){
-                                    Toast.makeText(getApplicationContext(), "TEST SUCCESS", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Se completó la acción con éxito!", Toast.LENGTH_SHORT).show();
                                     if(like_state){
                                         like.setImageDrawable(getDrawable(R.drawable.like));
                                         like_state = false;
@@ -78,7 +78,7 @@ public class DetallePlantaActivity extends AppCompatActivity {
                                         like_state = true;
                                     }
                                 }else {
-                                    Toast.makeText(getApplicationContext(), "TEST ERROR!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Error no se pudo completar la operación!!", Toast.LENGTH_SHORT).show();
                                 }
                                 pDialog.dismiss();
                             } catch (JSONException exception) {

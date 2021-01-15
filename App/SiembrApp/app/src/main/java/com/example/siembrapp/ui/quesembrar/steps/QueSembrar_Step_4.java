@@ -51,6 +51,14 @@ public class QueSembrar_Step_4 extends AppCompatActivity {
 
         TextView title = findViewById(R.id.que_sembrar_light_title_textView2);
 
+        ImageView atrasBTN = findViewById(R.id.atrasBtn7);
+        atrasBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         Bundle extras = getIntent().getExtras();
         String region = extras.getString("region");
         int step = extras.getInt("step");

@@ -96,6 +96,8 @@ public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.
                 detallesViveroIntent.putExtra("vivero",vivero);
 
                 v.getContext().startActivity(detallesViveroIntent);
+
+                pDialog.dismiss();
             }
         });
     }
