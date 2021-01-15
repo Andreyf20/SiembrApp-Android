@@ -1,5 +1,7 @@
 package com.example.siembrapp.ui.misplantas;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.siembrapp.Adapters.PlantasCardAdapter;
 import com.example.siembrapp.Interfaces.VolleyCallBack;
+import com.example.siembrapp.MainActivity;
 import com.example.siembrapp.R;
 import com.example.siembrapp.data.model.God;
+import com.example.siembrapp.ui.login.LoginActivity;
 import com.example.siembrapp.ui.register.RegisterActivity_Step_3;
 import com.example.siembrapp.ui.userinfo.UserInfo;
 
@@ -30,7 +34,7 @@ public class MisPlantasFragment extends Fragment {
     PlantasCardAdapter adapter;
     View root;
 
-    private boolean onResume = false;
+    private boolean onResume = true;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +68,9 @@ public class MisPlantasFragment extends Fragment {
         super.onResume();
 
         if(this.onResume){
+            final ProgressDialog pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Actualizando información...");
+            pDialog.show();
             God.getPlantasDeUsuario(root.getContext(), new VolleyCallBack() {
 
                 @Override
@@ -75,6 +82,8 @@ public class MisPlantasFragment extends Fragment {
                     plantasrv.setAdapter(adapter);
 
                     Objects.requireNonNull(plantasrv.getAdapter()).notifyDataSetChanged();
+
+                    pDialog.dismiss();
                 }
 
                 @Override

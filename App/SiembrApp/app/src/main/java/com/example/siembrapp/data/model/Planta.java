@@ -152,7 +152,7 @@ public class Planta implements Serializable {
         String info = "";
 
         info += "Nombre comun: "+ getNombreComun() +"\n";
-        info += "Nombre cientifico: "+ getNombreComun()+"\n";
+        info += "Nombre cientifico: "+ getNombreCientifico()+"\n";
 
         return info;
     }

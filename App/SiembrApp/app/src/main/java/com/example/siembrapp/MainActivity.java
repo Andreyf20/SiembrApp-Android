@@ -56,4 +56,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResumeFragments() {
         super.onResumeFragments();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        super.onResumeFragments();
+    }
 }
