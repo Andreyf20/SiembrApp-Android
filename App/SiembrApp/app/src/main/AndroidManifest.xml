@@ -14,20 +14,30 @@
         android:roundIcon="@mipmap/launcher_ic_siembrapp_round"
         android:screenOrientation="sensorPortrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".ui.quesembrar.steps.QueSembrarShowAll"></activity>
-        <activity android:name=".ui.userinfo.UserInfoUpdate" />
-        <activity android:name=".ui.userinfo.UserInfo" />
-        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_4" />
-        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_3" />
-        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_2" />
-        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_1" />
-        <activity android:name=".ui.viveros.DetallesViveroActivity" />
-        <activity android:name=".ui.detallesPlanta.DetallePlantaActivity" />
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.quesembrar.steps.QueSembrarShowAll"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.userinfo.UserInfoUpdate"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.userinfo.UserInfo"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_4"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_3"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.quesembrar.steps.QueSembrar_Step_1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.viveros.DetallesViveroActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.detallesPlanta.DetallePlantaActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.register.RegisterActivity_Step_3"
             android:parentActivityName=".ui.register.RegisterActivity_Step_2"

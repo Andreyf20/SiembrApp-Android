@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/White"
     tools:context=".ui.misplantas.MisPlantasFragment">
 
     <Button
@@ -12,7 +13,7 @@
         android:layout_height="41dp"
         android:layout_marginStart="323dp"
         android:layout_marginTop="2dp"
-        android:background="@drawable/user_icon"
+        android:background="@drawable/user"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/plantasrv"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +26,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
         android:padding="5dp"
+        android:background="@color/White"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

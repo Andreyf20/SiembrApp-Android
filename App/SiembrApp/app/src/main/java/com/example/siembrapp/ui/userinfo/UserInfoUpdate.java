@@ -138,7 +138,6 @@ public class UserInfoUpdate extends AppCompatActivity implements AdapterView.OnI
     }
 
     @Override
-
     public void onNothingSelected(AdapterView<?> parent) {
         setSelectionSpinner(user.getTipoOrganizacion());
     }
