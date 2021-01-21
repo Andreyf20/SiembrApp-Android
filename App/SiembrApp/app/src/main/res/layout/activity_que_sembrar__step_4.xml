@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.quesembrar.steps.QueSembrar_Step_4"
+    android:backgroundTint="@color/White">
+
+  <TextView
+      android:id="@+id/que_sembrar_light_title_textView2"
+      android:layout_width="234dp"
+      android:layout_height="46dp"
+      android:layout_marginStart="11dp"
+      android:layout_marginTop="50dp"
+      android:layout_marginEnd="89dp"
+      android:text="XD"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/que_sembrar_light_description_textView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/atrasBtn7"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageButton
+      android:id="@+id/atrasBtn7"
+      android:layout_width="61dp"
+      android:layout_height="52dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="30dp"
+      android:background="@color/White"
+      android:minWidth="50dp"
+      android:tint="@color/colorPrimary"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/abc_vector_test" />
+
+  <Button
+      android:id="@+id/show_all_button"
+      android:layout_width="200dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start"
+      android:layout_marginTop="30dp"
+      android:background="@drawable/border"
+      android:ellipsize="none"
+      android:enabled="true"
+      android:text="@string/show_all"
+      android:textColor="@color/colorPrimaryDark"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/que_sembrar_light_title_textView2" />
+
+  <TextView
+      android:id="@+id/planta_user_title_textView_1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="25dp"
+      android:layout_marginTop="50dp"
+      android:text="@string/best_results"
+      android:textSize="20dp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/show_all_button" />
+
+  <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:paddingStart="10dp"
+      android:paddingEnd="10dp"
+      android:scrollbars="horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/planta_user_title_textView_1">
+
+    <LinearLayout
+        android:id="@+id/gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp" />
+  </HorizontalScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

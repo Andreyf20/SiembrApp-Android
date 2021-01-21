@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="tipo_organizacion">
+    <item>Asada</item>
+    <item>Estado</item>
+    <item>Gobierno local</item>
+    <item>ONG</item>
+    <item>Otro</item>
+</string-array>
+</resources>

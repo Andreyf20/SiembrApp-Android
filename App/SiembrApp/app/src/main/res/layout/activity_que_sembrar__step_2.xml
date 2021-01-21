@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.quesembrar.steps.QueSembrar_Step_2"
+    android:backgroundTint="@color/White">
+
+    <ImageView
+        android:id="@+id/que_sembrar_imageView"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/stage2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/que_sembrar_description_textView"
+        app:srcCompat="@drawable/ic_home_black_24dp" />
+
+    <SeekBar
+        android:id="@+id/que_sembrar_seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="251dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="30dp"
+        android:max="3"
+        android:progress="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/que_sembrar_imageView" />
+
+    <TextView
+        android:id="@+id/que_sembrar_description_textView"
+        android:layout_width="236dp"
+        android:layout_height="78dp"
+        android:text="@string/que_sembrar_description"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/que_sembrar_title_textView" />
+
+    <TextView
+        android:id="@+id/que_sembrar_title_textView"
+        android:layout_width="234dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="89dp"
+        android:text="XD"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/que_sembrar_description_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/atrasBtn3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/atrasBtn3"
+        android:layout_width="61dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/White"
+        android:minWidth="50dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test" />
+
+    <Button
+        android:id="@+id/que_sembrar_next_step2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="254dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="37dp"
+        android:background="@drawable/border"
+        android:ellipsize="none"
+        android:enabled="true"
+        android:text="@string/next_step"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/que_sembrar_seekBar" />
+</androidx.constraintlayout.widget.ConstraintLayout>

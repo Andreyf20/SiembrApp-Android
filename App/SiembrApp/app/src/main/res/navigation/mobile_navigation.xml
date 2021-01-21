@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_misarboles">
+
+    <fragment
+        android:id="@+id/navigation_misarboles"
+        android:name="com.example.siembrapp.ui.misplantas.MisPlantasFragment"
+        android:label="@string/misarboles"
+        tools:layout="@layout/fragment_misplantas" />
+
+    <fragment
+        android:id="@+id/navigation_quesembrar"
+        android:name="com.example.siembrapp.ui.quesembrar.QueSembrarFragment"
+        android:label="@string/quesembrar"
+        tools:layout="@layout/fragment_quesembrar" />
+
+    <fragment
+        android:id="@+id/navigation_viveros"
+        android:name="com.example.siembrapp.ui.viveros.ViverosFragment"
+        android:label="@string/viveros"
+        tools:layout="@layout/fragment_viveros" />
+</navigation>

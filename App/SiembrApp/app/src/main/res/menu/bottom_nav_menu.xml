@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_misarboles"
+        android:icon="@drawable/ic_eucalyptus"
+        android:title="@string/misarboles" />
+
+    <item
+        android:id="@+id/navigation_quesembrar"
+        android:icon="@drawable/ic_sprout"
+        android:title="@string/quesembrar" />
+
+    <item
+        android:id="@+id/navigation_viveros"
+        android:icon="@drawable/ic_nursery_garden"
+        android:title="@string/viveros" />
+
+</menu>
