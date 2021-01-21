@@ -58,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         registerEditText = findViewById(R.id.registerHyperlink);
         acceptPermissions = findViewById(R.id.accept_permissions);
 
-        usernameEditText.setText("admin@siembrapp.com");
-        passwordEditText.setText("admin");
+        //usernameEditText.setText("admin@siembrapp.com");
+        //passwordEditText.setText("admin");
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(JSONObject object) {
 
-                                                pDialog.hide();
+                                                pDialog.dismiss();
 
                                                 //Ya el usuario esta setteado, podemos pasar de actividad
                                                 Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -104,21 +104,25 @@ public class LoginActivity extends AppCompatActivity {
 
                                             @Override
                                             public void onFailure() {
+                                                pDialog.dismiss();
 
                                             }
 
                                             @Override
                                             public void noConnection() {
+                                                pDialog.dismiss();
 
                                             }
 
                                             @Override
                                             public void timedOut() {
+                                                pDialog.dismiss();
 
                                             }
                                         });
 
                                     }else {
+                                        pDialog.dismiss();
                                         Toast.makeText(getApplicationContext(), R.string.loginError, Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException exception) {
@@ -269,7 +273,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(JSONObject object) {
                         //User ya existe, seguimos con sus plantas
                         Log.d("XD",God.getLoggedUser().getUuid());
-                        getPlantasDelUsuario(new VolleyCallBack() {
+                        callback.onSuccess(null);
+                        /*getPlantasDelUsuario(new VolleyCallBack() {
                             @Override
                             public void onSuccess(JSONObject object) {
 
@@ -292,7 +297,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void timedOut() {
 
                             }
-                        });
+                        });*/
 
                     }
 
