@@ -49,7 +49,6 @@ public class QueSembrarShowAll extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    Log.d("PRUEBA", "onEditorAction: ");
                     // hide virtual keyboard
                     InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
@@ -146,7 +145,7 @@ public class QueSembrarShowAll extends AppCompatActivity {
                                         .setMinRangoAltitudinal(Double.parseDouble(element.getString("minrangoaltitudinal")))
                                         .setMaxRangoAltitudinal(Double.parseDouble(element.getString("maxrangoaltitudinal")))
                                         .setMetros(Double.parseDouble(element.getString("metros")))
-                                        .setHabito(element.getString("requerimientosdeluz"))
+                                        .setHabito(element.getString("habito"))
                                         .setFruto(element.getString("frutos"))
                                         .setTexturaFruto(element.getString("texturafruto"))
                                         .setFlor(element.getString("flor"))

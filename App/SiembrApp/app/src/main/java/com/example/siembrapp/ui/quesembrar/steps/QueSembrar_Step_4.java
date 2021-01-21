@@ -128,7 +128,7 @@ public class QueSembrar_Step_4 extends AppCompatActivity {
                                         .setMinRangoAltitudinal(Double.parseDouble(element.getString("minrangoaltitudinal")))
                                         .setMaxRangoAltitudinal(Double.parseDouble(element.getString("maxrangoaltitudinal")))
                                         .setMetros(Double.parseDouble(element.getString("metros")))
-                                        .setHabito(element.getString("requerimientosdeluz"))
+                                        .setHabito(element.getString("habito"))
                                         .setFruto(element.getString("frutos"))
                                         .setTexturaFruto(element.getString("texturafruto"))
                                         .setFlor(element.getString("flor"))
