@@ -132,18 +132,13 @@
 
     <Button
         android:id="@+id/continueStep2Btn"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="140dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="65dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/border"
         android:text="@string/siguiente"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordVerificationET" />
 </androidx.constraintlayout.widget.ConstraintLayout>
