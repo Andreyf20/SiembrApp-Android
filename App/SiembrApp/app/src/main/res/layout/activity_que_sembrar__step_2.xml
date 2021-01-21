@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quesembrar.steps.QueSembrar_Step_2">
+    tools:context=".ui.quesembrar.steps.QueSembrar_Step_2"
+    android:backgroundTint="@color/White">
 
     <ImageView
         android:id="@+id/que_sembrar_imageView"

@@ -45,7 +45,6 @@ public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.
         public ViewHolder(View itemView){
             super(itemView);
 
-            img = itemView.findViewById(R.id.fotoViveroIV);
             nombreViveroTV = itemView.findViewById(R.id.nombreViveroTV);
             direccionViveroTV = itemView.findViewById(R.id.direccionViveroTV);
             card = itemView.findViewById(R.id.viveroCard);
@@ -77,10 +76,6 @@ public class ViverosCardAdapter extends RecyclerView.Adapter<ViverosCardAdapter.
 
         TextView direccionViveroTV = holder.direccionViveroTV;
         direccionViveroTV.setText(vivero.getDireccion());
-
-        // Foto de icono vivero temporalmente
-        ImageView img = holder.img;
-        img.setImageResource(R.drawable.ic_nursery_garden);
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override

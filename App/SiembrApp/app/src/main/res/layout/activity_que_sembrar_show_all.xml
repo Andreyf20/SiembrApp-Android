@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quesembrar.steps.QueSembrarShowAll">
+    tools:context=".ui.quesembrar.steps.QueSembrarShowAll"
+    android:backgroundTint="@color/White">
 
     <TextView
         android:id="@+id/que_sembrar_light_title_textView3"

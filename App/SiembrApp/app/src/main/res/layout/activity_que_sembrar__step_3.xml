@@ -69,6 +69,7 @@
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
             android:text="@string/light_level_1"
+            android:textColor="@color/colorPrimary"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -101,6 +102,7 @@
             android:paddingStart="5dp"
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
+            android:textColor="@color/colorPrimary"
             android:text="@string/light_level_2_1"
             android:textStyle="bold"
             tools:ignore="RtlSymmetry" />
@@ -137,6 +139,7 @@
             android:paddingEnd="5dp"
             android:text="@string/light_level_3_1"
             android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -170,6 +173,7 @@
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
             android:text="@string/light_level_4_1"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             tools:ignore="RtlSymmetry" />
 
